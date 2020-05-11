@@ -1,0 +1,385 @@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<link rel = 'stylesheet' href = 'https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.1/css/materialize.min.css'>
+<script src = 'https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.1/js/materialize.min.js'></script>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=DM+Serif+Text&display=swap" rel="stylesheet">
+
+
+<script type="text/javascript" async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+<script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
+
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Text&display=swap" rel="stylesheet">
+
+<style>
+    h3 {
+        font-family: "DM Mono";
+        font-weight: 400;
+    }
+
+    .serif {
+        font-family: 'DM Mono'; 
+        font-weight: 400;
+
+        width: 250px;
+    }
+
+    body {
+        font-family: "DM Mono";
+        font-size: 17px;
+        font-weight: 300;
+    
+        overflow-y: scroll;
+        scrollbar-width: 0; /* Firefox */
+        -ms-overflow-style: none;  /* Internet Explorer 10+ */
+    }
+    body::-webkit-scrollbar { /* WebKit */
+        width: 2;
+        height: 0;
+    }
+
+    .link {
+        background: linear-gradient(to bottom, #00000000 60%, #4b2e8322 40%);
+    }
+
+    .project-image {
+        width: 300px;
+        height: 300px;
+
+        border-style: solid;
+        border-width: 2px;
+        border-color: black;
+
+    }
+
+    .project-text {
+        position: relative; 
+        width: 275px;
+        top: -50px;
+        left: 75px;
+
+        font-size: 20px;
+
+        background: #ffffff;
+        padding: 10px;
+        border-style: solid;
+        border-width: 2px;
+        border-color: black;
+    } 
+
+    .text-center {
+        top: -50px;
+        left: 12.5px;
+    }
+
+    .text-left {
+        top: -50px;
+        left: -50px;
+    }
+
+    .project {
+         }
+
+         a {
+             color: #2222ff;
+             text-decoration: none ;
+         }
+        
+    #cart {
+        width: 50px;
+        height: 20px;
+        background: red;
+
+        position: absolute; 
+        bottom:0;
+        left: -25px;
+    }
+
+    #pole {
+        width: 10px;
+        height: 80px;
+        background: blue;
+
+        position: absolute; 
+        bottom:10;
+        left: -5px;
+
+        transform-origin: 50% 100%;
+    }
+
+</style>
+
+<head><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=3.0, user-scalable=yes" />
+    <meta charset="utf-8">
+
+    <title>✋ Nathan Yan</title>
+    <meta name="description" content="Personal website of Nathan Yan">
+    <meta name="author" content="Nathan Yan">
+  
+    <link rel="stylesheet" href="css/styles.css?v=1.0">
+</head>
+
+<html style = 'width: 100%; height: 100%'>
+    <body style = 'width: 100%; height: 100%'>
+        <div style = 'height: 100%; display:flex; align-items: center; padding: 50px; background: white' id = 'intro'>
+            <div style = 'width: 400px; margin-left: calc(50% - 200px)'>
+                <h3>Hi!</h3>
+                <p style = 'margin-top: -15px; color: #2222ff; font-weight: 400'><a href = 'https://github.com/nathan-yan'>github</a> · <a href = 'mailto:nathancy@uw.edu'>nathancy[at]uw[dot]edu</a></p>
+                <p>My name is <span style = 'font-weight: 500'>Nathan Yan</span>. I am an incoming freshman at the Paul G. Allen School at the <span class = 'link' style = 'color: #4b2e83; font-weight: 500'>University of Washington</span>.</p>
+                <p>I love computer science and the positive impacts it's made. I have an interest in artificial intelligence, specifically deep reinforcement learning.</p>
+                <p>Take a look at some of the things I've worked on over the years! ⬇️</p>
+            </div>
+
+            <div id = 'cart'></div>
+            <div id = 'pole'></div>
+        </div>
+
+        <div style = 'padding-bottom: 100px; margin-top: 100px;'>
+            <div style = 'width: 400px; margin-left: calc(50% - 200px)'>
+                <h3>Projects.</h3>
+                <p>These are some things I've worked on, either because a neat idea caught my attention, or I had a problem I wanted to solve.</p>
+            </div>
+            <div style = 'position: relative; height: 100%; display: flex; flex-wrap: wrap; padding: 50px; justify-content: center;'>
+                
+                <div class = 'project' style = 'top: 10px; left: 20px; margin-right: 150px'>
+                    <img class = 'project-image' src = 'https://github.com/nathan-yan/mnist-neural-automata/raw/master/mnist.gif'>
+                    <div class = 'project-text'>Growing MNIST digits with neural cellular automata</div>
+                </div>
+
+                <div class = 'project' style = 'top: 30px; left: 10px; margin-right: 150px'>
+                    <img class = 'project-image' src = 'https://nathan-yan.github.io/fractals/fractals/fractal16_.png'>
+                    <div class = 'project-text text-center'>Generating fractals with complex "neural networks"</div>
+                </div>
+
+                <div class = 'project' style = 'top: -15px; left: 15px;'>
+                    <img class = 'project-image' src = 'https://github.com/nathan-yan/mnist-neural-automata/raw/master/mnist.gif'>
+                    <div class = 'project-text text-left'><span  style = 'font-weight: 500'>GradeBook</span>, an intuitive grade viewer</div>
+                </div>
+
+                <div class = 'project' style = 'top: -15px; left: 15px; margin-right: 150px'>
+                    <img class = 'project-image' src = 'https://github.com/nathan-yan/mnist-neural-automata/raw/master/mnist.gif'>
+                    <div class = 'project-text'><span style = 'font-weight: 500'>otp_</span>, a commandline one-time password interface
+                    </div>
+                </div>
+
+                <div class = 'project' style = 'top: -15px; left: 15px; margin-right: 150px'>
+                    <img class = 'project-image' src = 'https://github.com/nathan-yan/mnist-neural-automata/raw/master/mnist.gif'>
+                    <div class = 'project-text text-center'><span style = 'font-weight: 500'>poly</span>, an 8bit multiplayer platformer
+                    </div>
+                </div>
+
+                <div class = 'project' style = 'top: -15px; left: 15px;'>
+                    <img class = 'project-image' src = './assets/wells.gif'>
+                    <div class = 'project-text text-left'><span style = 'font-weight: 500'>Wells</span>, an illustration of various gradient descent methods</div>
+                </div>
+            </div>
+
+            <div style = 'width: 400px; margin-left: calc(50% - 200px); margin-top: 100px'>
+                <h3>Models.</h3>
+                <p>These are implementations of papers I found especially cool.</p>
+            </div>
+            <div style = 'position: relative; height: 100%; display: flex; flex-wrap: wrap; padding: 50px; justify-content: center;'>
+                <div class = 'project' style = 'top: 10px; left: 20px; margin-right: 150px'>
+                    <img class = 'project-image' src = './assets/ntm.PNG'>
+                    <div class = 'project-text'>Neural Turing Machines [Graves et al.,2014]</div>
+                </div>
+
+                <div class = 'project' style = 'top: 10px; left: 20px; margin-right: 150px'>
+                    <img class = 'project-image' src = './assets/visual-attention.PNG'>
+                    <div class = 'project-text text-center'>Recurrent Models of Visual Attention [Mnih et al.,2014]</div>
+                </div>
+
+                <div class = 'project' style = 'top: 10px; left: 20px; margin-right: 0px'>
+                    <img class = 'project-image' src = './assets/draw.PNG'>
+                    <div class = 'project-text text-left'>Deep Recurrent Attentive Writer [Gregor et al.,2015]</div>
+                </div>
+
+                <div class = 'project' style = 'top: 10px; left: 20px; margin-right: 150px;'>
+                    <img class = 'project-image' src = 'https://miro.medium.com/max/640/1*jXpSVhjWRxgzDDKKVAQR8A.gif
+                    '>
+                    <div class = 'project-text'>Deep Q Networks [Mnih et al.,2013]</div>
+                </div>
+
+                <div class = 'project' style = 'top: 10px; left: 20px; margin-right: 0px'>
+                    <img class = 'project-image' src = 'https://magenta.tensorflow.org/assets/sketch_rnn_demo/img/sketch_garden.gif
+                    '>
+                    <div class = 'project-text text-left'>Sketch-RNN [Ha & Eck,2017]</div>
+                </div>
+
+            </div>
+        </div>
+
+    </body>
+</html>
+
+<script src = "./weights.js"></script>
+
+<script>
+    /*this code is heavily borrowed from the cartpole environment of OpenAI's gym*/
+    $(document).mousemove((e) => {
+     
+        let width = $(window).width();
+        let pos = e.clientX;
+
+        let scaledPos = (e.clientX - width / 2) / (width / 2) * 3;
+        targetTarget = scaledPos; 
+    });
+
+
+    let state = [
+        (Math.random() - 0.5) * 2 * 2.,
+        (Math.random() - 0.5) / 10. * 1,
+        (Math.random() - 0.5) / 10. * 1,
+        (Math.random() - 0.5) / 10. * 1,
+        (Math.random() - 0.5) * 2 * 2.
+    ];
+
+    let targetTarget = 0;
+    let gravity = 9.8;
+    let masspole = 0.1;
+    let masscart = 1.0;
+    let length = 0.5;
+    let total_mass = (masspole + masscart);
+    let polemass_length = masspole * length;
+    let force_mag = 10.0;
+    let tau = 0.02;
+    let x_threshold = 4;
+    let theta_threshold_radians = 30 * 2 * Math.PI / 360.;
+
+    let tanh = (x) => {
+        return (Math.exp(2 * x) - 1) / ( Math.exp(2  *x) + 1);
+    }
+
+    let temperature = 5;
+
+    let model = (obs) => {
+        // obs -> 5 vector
+
+        //janky for loop matrix multiplication
+        let hiddenActivations = []
+        for (let n = 0; n < 30; n++){
+           let neuronAcc = 0;
+            for (let i = 0; i < 5; i++){
+                neuronAcc += ih_weight[n][i] * obs[i];
+           } 
+
+           neuronAcc += ih_bias[n];
+
+           // tanh
+           hiddenActivations.push(tanh(neuronAcc));
+        }
+
+        let outputActivations = [];
+        for (let n = 0; n < 2; n++){
+            let neuronAcc = 0;
+            for (let i = 0; i < 30; i++){
+                neuronAcc += ha_weight[n][i] * hiddenActivations[i];
+            }
+
+            neuronAcc += ha_bias[n];
+
+            // sigmoid 
+            outputActivations.push(Math.exp(neuronAcc * temperature));
+        }
+
+        // normalize output activations
+        let sum = outputActivations.reduce((a, b) => {return a + b;}, 0)
+        for (let i = 0; i < outputActivations.length; i++){
+            outputActivations[i] /= sum;
+        }
+
+        return outputActivations;
+
+    }
+
+    let step = (state, action) => {
+        x = state[0];
+        x_dot = state[1];
+        theta = state[2];
+        theta_dot = state[3];
+        target = state[4];
+
+        if (action === 1){
+            force = force_mag 
+        }
+        else{
+            force = -force_mag
+        }
+        //force = 0;
+
+        costheta = Math.cos(theta)
+        sintheta = Math.sin(theta)
+
+        temp = (force + polemass_length * theta_dot ** 2 * sintheta) / total_mass
+        thetaacc = (gravity * sintheta - costheta * temp) / (length * (4.0 / 3.0 - masspole * costheta ** 2 / total_mass))
+        xacc = temp - polemass_length * thetaacc * costheta / total_mass
+
+        x = x + tau * x_dot
+        x_dot = x_dot + tau * xacc
+        theta = theta + tau * theta_dot
+        theta_dot = theta_dot + tau * thetaacc
+
+        state = [x, x_dot, theta, theta_dot, target]
+
+        done = x < -x_threshold || x > x_threshold || theta < -theta_threshold_radians || theta > theta_threshold_radians;
+        
+        return [state, done]
+    }
+
+    let pole = document.getElementById('pole');
+    //console.log('yeet');
+
+    let getRandomInt = (min, max) => {
+        min = Math.ceil(min);
+        max = Math.floor(max);
+        return Math.floor(Math.random() * (max - min)) + min;
+    }
+
+    setInterval( () => {
+        let actionProbs = model(state);
+
+        let action;
+        if (Math.random() < actionProbs[0]){
+            action = 0;
+        }else{
+            action = 1;
+        }
+
+        env = step(state, action);
+        state = env[0];
+        done = env[1];
+
+        // move target closer to targetTarget
+        state[4] = (0.94) * state[4] + 0.06 * targetTarget;
+
+        //console.log( "rotate(" + state[0] + "rad)");
+        let width = $(window).width();
+        let scale = $(window).width() / 6;
+
+        let translate = `translateX(${(state[0]) * scale + width / 2}px)`;
+        pole.style.transform = translate + " rotate(" + Math.round(state[2] * 180/Math.PI) + "deg)";
+        cart.style.transform = translate;
+
+        if (Math.abs(state[0] - state[4]) < 0.2){
+            cart.style.background = "darkgreen";
+        }else if (Math.abs(state[0] - state[4]) < 0.5){
+            cart.style.background = "gold";
+        }else {
+            cart.style.background= 'red';
+        }
+
+        //console.log(state[0] * 180 / Math.PI);
+
+        if (done) {
+            state = [
+                (Math.random() - 0.5) * 2 * 2.,
+                (Math.random() - 0.5) / 10.,
+                (Math.random() - 0.5) / 10.,
+                (Math.random() - 0.5) / 10.,
+                (Math.random() - 0.5) * 2 * 2.
+            ];
+        }
+    }, 1000 / 50.);
+        
+    
+</script>
