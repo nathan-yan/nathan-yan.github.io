@@ -38,21 +38,13 @@
         height: 0;
     }
 
-    .link {
-        background: linear-gradient(to bottom, #00000000 60%, #4b2e8322 40%);
+
+    .text-block {
+        width: 400px;
+        margin-left: calc(50% - 200px); 
     }
 
-    .project-image {
-        width: 300px;
-        height: 300px;
-
-        border-style: solid;
-        border-width: 2px;
-        border-color: black;
-
-    }
-
-    .project-text {
+    .text {
         position: relative; 
         width: 275px;
         top: -50px;
@@ -66,6 +58,44 @@
         border-width: 2px;
         border-color: black;
     } 
+
+    @media only screen and (max-width: 600px) {
+        body {
+            font-size: 15px;
+        }
+
+        .text-block {
+            width: 250px;
+            margin-left: calc(50% - 125px);
+        }
+
+        h3 {
+            font-size: 2.5rem;
+        }
+
+        .text {
+            font-size: 17px;
+        }
+    }
+
+
+    .link {
+        background: linear-gradient(to bottom, #00000000 60%, #4b2e8322 40%);
+    }
+
+    .image {
+        width: 300px;
+        height: 300px;
+
+        object-fit: cover;
+
+        border-style: solid;
+        border-width: 2px;
+        border-color: black;
+
+    }
+
+  
 
     .text-center {
         top: -50px;
@@ -107,6 +137,15 @@
         transform-origin: 50% 100%;
     }
 
+    #link-block {
+        position: fixed;
+        top: -100px;
+        
+        background: #101020;
+        color: white;
+        padding: 3px 7px;
+    }
+
 </style>
 
 <head><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=3.0, user-scalable=yes" />
@@ -121,12 +160,12 @@
 
 <html style = 'width: 100%; height: 100%'>
     <body style = 'width: 100%; height: 100%'>
-        <div style = 'height: 100%; display:flex; align-items: center; padding: 50px; background: white' id = 'intro'>
-            <div style = 'width: 400px; margin-left: calc(50% - 200px)'>
+        <div style = 'height: fit-content; min-height: 100%; display:flex; align-items: center; padding: 50px; background: white' id = 'intro'>
+            <div class = 'text-block' >
                 <h3>Hi!</h3>
-                <p style = 'margin-top: -15px; color: #2222ff; font-weight: 400'><a href = 'https://github.com/nathan-yan'>github</a> · <a href = 'mailto:nathancy@uw.edu'>nathancy[at]uw[dot]edu</a></p>
-                <p>My name is <span style = 'font-weight: 500'>Nathan Yan</span>. I am an incoming freshman at the Paul G. Allen School at the <span class = 'link' style = 'color: #4b2e83; font-weight: 500'>University of Washington</span>.</p>
-                <p>I love computer science and the positive impacts it's made. I have an interest in artificial intelligence, specifically deep reinforcement learning.</p>
+                <p style = 'margin-top: -15px; color: #2222ff; font-weight: 400'><a ref = "assets/resume.pdf" href = 'assets/resume.pdf' class = 'olink'>résumé</a> · <a ref = "mailto:nathancy@uw.edu" href = 'mailto:nathancy@uw.edu' class = 'olink'>nathancy[at]uw[dot]edu</a></p>
+                <p>My name is <span style = 'font-weight: 500'>Nathan Yan</span>. I am an incoming freshman at the <a class = 'olink' href = 'https://cs.washington.edu' ref = 'cs.washington.edu'>Paul G. Allen School</a> at the <a href = 'https://washington.edu'><span class = 'olink link' ref = 'washington.edu' style = 'color: #4b2e83; font-weight: 500'>University of Washington</span></a>.</p>
+                <p>I love all things computer science. I have an particular interest in artificial intelligence, specifically deep reinforcement learning.</p>
                 <p>Take a look at some of the things I've worked on over the years! ⬇️</p>
             </div>
 
@@ -135,82 +174,177 @@
         </div>
 
         <div style = 'padding-bottom: 100px; margin-top: 100px;'>
-            <div style = 'width: 400px; margin-left: calc(50% - 200px)'>
+            <div class = 'text-block'>
                 <h3>Projects.</h3>
-                <p>These are some things I've worked on, either because a neat idea caught my attention, or I had a problem I wanted to solve.</p>
+                <p>These are some things I've worked on, either because a neat idea caught my attention or I had a problem I wanted to solve.</p>
             </div>
-            <div style = 'position: relative; height: 100%; display: flex; flex-wrap: wrap; padding: 50px; justify-content: center;'>
+            <div id = 'projects' style = 'position: relative; height: fit-content; display: flex; flex-wrap: wrap; padding: 50px; justify-content: center;'>
                 
                 <div class = 'project' style = 'top: 10px; left: 20px; margin-right: 150px'>
-                    <img class = 'project-image' src = 'https://github.com/nathan-yan/mnist-neural-automata/raw/master/mnist.gif'>
-                    <div class = 'project-text'>Growing MNIST digits with neural cellular automata</div>
+                    <a href = 'https://github.com/nathan-yan/mnist-neural-automata'><img class = 'olink image' ref = 'nathan-yan/mnist-neural-automata' src = 'https://github.com/nathan-yan/mnist-neural-automata/raw/master/mnist.gif'></a>
+                    <div class = 'text'>Growing MNIST digits with neural cellular automata</div>
                 </div>
 
                 <div class = 'project' style = 'top: 30px; left: 10px; margin-right: 150px'>
-                    <img class = 'project-image' src = 'https://nathan-yan.github.io/fractals/fractals/fractal16_.png'>
-                    <div class = 'project-text text-center'>Generating fractals with complex "neural networks"</div>
+                    <a href = 'https://github.com/nathan-yan/fractals'><img class = 'olink image' ref = 'nathan-yan/fractals' src = 'https://nathan-yan.github.io/fractals/fractals/fractal16_.png'></a>
+                    <div class = 'text text-center'>Generating fractals with complex "neural networks" <a href = 'https://nathan-yan.github.io/fractals' class = 'olink' ref = 'nathan-yan.github.io/fractals'>Blog post</a></div>
                 </div>
 
                 <div class = 'project' style = 'top: -15px; left: 15px;'>
-                    <img class = 'project-image' src = 'https://github.com/nathan-yan/mnist-neural-automata/raw/master/mnist.gif'>
-                    <div class = 'project-text text-left'><span  style = 'font-weight: 500'>GradeBook</span>, an intuitive grade viewer</div>
+                    <a href = 'https://github.com/team-llambda/gradebook-backend'><img class = 'olink image' ref = 'team-llambda/gradebook-backend' src = './assets/gradebook.png'></a>
+                    <div class = 'text text-left'><span  style = 'font-weight: 500'>GradeBook</span>, an intuitive grade viewer</div>
                 </div>
 
                 <div class = 'project' style = 'top: -15px; left: 15px; margin-right: 150px'>
-                    <img class = 'project-image' src = 'https://github.com/nathan-yan/mnist-neural-automata/raw/master/mnist.gif'>
-                    <div class = 'project-text'><span style = 'font-weight: 500'>otp_</span>, a commandline one-time password interface
+                    <a href = 'https://github.com/nathan-yan/otp_'><img class = 'olink image' ref = 'nathan-yan/otp_' src = './assets/demo_otp.gif'></a>
+                    <div class = 'text'><span style = 'font-weight: 500'>otp_</span>, a commandline one-time password interface
                     </div>
                 </div>
 
                 <div class = 'project' style = 'top: -15px; left: 15px; margin-right: 150px'>
-                    <img class = 'project-image' src = 'https://github.com/nathan-yan/mnist-neural-automata/raw/master/mnist.gif'>
-                    <div class = 'project-text text-center'><span style = 'font-weight: 500'>poly</span>, an 8bit multiplayer platformer
+                    <a href = 'https://github.com/nathan-yan/poly'><img class = 'olink image' ref = 'nathan-yan/poly' src = './assets/poly.gif'></a>
+                    <div class = 'text text-center'><span style = 'font-weight: 500'>poly</span>, an 8bit multiplayer platformer (WIP!)
                     </div>
                 </div>
 
                 <div class = 'project' style = 'top: -15px; left: 15px;'>
-                    <img class = 'project-image' src = './assets/wells.gif'>
-                    <div class = 'project-text text-left'><span style = 'font-weight: 500'>Wells</span>, an illustration of various gradient descent methods</div>
+                    <a href = 'https://github.com/nathan-yan/wells'><img class = 'olink image' ref = 'nathan-yan/wells' src = './assets/wells.gif'></a>
+                    <div class = 'text text-left'><span style = 'font-weight: 500'>Wells</span>, an illustration of various gradient descent methods</div>
                 </div>
+
             </div>
 
-            <div style = 'width: 400px; margin-left: calc(50% - 200px); margin-top: 100px'>
+            <div class = 'text-block' style = 'margin-top: 100px'>
                 <h3>Models.</h3>
                 <p>These are implementations of papers I found especially cool.</p>
             </div>
-            <div style = 'position: relative; height: 100%; display: flex; flex-wrap: wrap; padding: 50px; justify-content: center;'>
-                <div class = 'project' style = 'top: 10px; left: 20px; margin-right: 150px'>
-                    <img class = 'project-image' src = './assets/ntm.PNG'>
-                    <div class = 'project-text'>Neural Turing Machines [Graves et al.,2014]</div>
+            <div id = 'models' style = 'position: relative; height: fit-content; display: flex; flex-wrap: wrap; padding: 50px; justify-content: center;'>
+                <div class = 'model' style = 'top: 10px; left: 20px; margin-right: 150px'>
+                    <a href = 'https://github.com/nathan-yan/neural-turingmachine'><img class = 'olink image' ref = 'nathan-yan/neural-turingmachine' src = './assets/ntm.PNG'></a>
+                    <div class = 'text'>Neural Turing Machines [Graves et al.,2014]</div>
                 </div>
 
-                <div class = 'project' style = 'top: 10px; left: 20px; margin-right: 150px'>
-                    <img class = 'project-image' src = './assets/visual-attention.PNG'>
-                    <div class = 'project-text text-center'>Recurrent Models of Visual Attention [Mnih et al.,2014]</div>
+                <div class = 'model' style = 'top: 10px; left: 20px; margin-right: 150px'>
+                    <a href = 'https://github.com/nathan-yan/recurrent-attention-models'><img class = 'olink image' ref = 'nathan-yan/recurrent-attention-models' src = './assets/visual-attention.PNG'></a>
+                    <div class = 'text text-center'>Recurrent Models of Visual Attention [Mnih et al.,2014]</div>
                 </div>
 
-                <div class = 'project' style = 'top: 10px; left: 20px; margin-right: 0px'>
-                    <img class = 'project-image' src = './assets/draw.PNG'>
-                    <div class = 'project-text text-left'>Deep Recurrent Attentive Writer [Gregor et al.,2015]</div>
+                <div class = 'model' style = 'top: 10px; left: 20px; margin-right: 0px'>
+                    <a href = 'https://github.com/nathan-yan/draw'><img class = 'olink image' ref = 'nathan-yan/draw' src = './assets/draw.gif'></a>
+                    <div class = 'text text-left'>Deep Recurrent Attentive Writer [Gregor et al.,2015]</div>
                 </div>
 
-                <div class = 'project' style = 'top: 10px; left: 20px; margin-right: 150px;'>
-                    <img class = 'project-image' src = 'https://miro.medium.com/max/640/1*jXpSVhjWRxgzDDKKVAQR8A.gif
-                    '>
-                    <div class = 'project-text'>Deep Q Networks [Mnih et al.,2013]</div>
+                <div class = 'model' style = 'top: 10px; left: 20px; margin-right: 150px;'>
+                    <a href = 'https://github.com/nathan-yan/DQN'><img class = 'olink image' ref = 'nathan-yan/DQN' src = 'https://miro.medium.com/max/640/1*jXpSVhjWRxgzDDKKVAQR8A.gif
+                    '></a>
+                    <div class = 'text'>Deep Q Networks [Mnih et al.,2013]</div>
                 </div>
 
-                <div class = 'project' style = 'top: 10px; left: 20px; margin-right: 0px'>
-                    <img class = 'project-image' src = 'https://magenta.tensorflow.org/assets/sketch_rnn_demo/img/sketch_garden.gif
-                    '>
-                    <div class = 'project-text text-left'>Sketch-RNN [Ha & Eck,2017]</div>
+                <div class = 'model' style = 'top: 10px; left: 20px; margin-right: 0px'>
+                    <a href = 'https://github.com/nathan-yan/sketch-rnn'><img class = 'olink image' ref = 'nathan-yan/sketch-rnn' src = 'https://magenta.tensorflow.org/assets/sketch_rnn_demo/img/sketch_garden.gif
+                    '></a>
+                    <div class = 'text text-left'>Sketch-RNN [Ha & Eck,2017]</div>
                 </div>
+
 
             </div>
         </div>
 
+        <div style = 'margin-top: 100px; text-align: center; margin-bottom: 50px; width: 75%; margin-left: 12.5%'>
+        Nathan Yan :: <a ref = "assets/resume.pdf" href = 'assets/resume.pdf' class = 'olink'>résumé</a> · <a ref = "mailto:nathancy@uw.edu" href = 'mailto:nathancy@uw.edu' class = 'olink'>nathancy[at]uw[dot]edu</a> · <a ref = "github.com/nathan-yan" href = 'https://github.com/nathan-yan' class = 'olink'>github</a></div>
+
+        <div id = 'link-block'></div>
+
+
     </body>
 </html>
+
+<script>
+    let handleEntities = (entities, n) => {
+        entities.map((idx, ent) => {
+        ent = $(ent);
+        if (idx % n == 0){
+            if (n == 1){ 
+                ent.find('.text')[0].className = 'text text-center';
+                ent.css('margin-right', '0px');
+            }else{
+                ent.find('.text')[0].className = 'text text-right';
+                ent.css('margin-right', '150px');
+            }
+        }else if (idx % n == 1){
+            if (n == 2){
+                ent.find('.text')[0].className = 'text text-left';
+                ent.css('margin-right', '0px');
+            }else{
+                ent.find('.text')[0].className = 'text text-center';
+                ent.css('margin-right', '150px');    
+            }
+        }else if (idx % 3 == 2){
+            ent.find('.text')[0].className = 'text text-left';
+            ent.css('margin-right', '0px');
+        }
+    })
+
+        if (n == 2 && entities.length % 2) {
+            $(entities[entities.length - 1]).find('.text')[0].className = 'text text-center';
+            $(entities[entities.length - 1]).css('margin-right', '0px');
+        }
+
+        else if (n == 3 && entities.length % 3 == 1) {
+            $(entities[entities.length - 1]).find('.text')[0].className = 'text text-center';
+            $(entities[entities.length - 1]).css('margin-right', '0px');
+        }else if (n == 3 && entities.length % 3 == 2) {
+            $(entities[entities.length - 1]).find('.text')[0].className = 'text text-left';
+                
+            $(entities[entities.length - 1]).css('margin-right', '0px');
+        }
+
+    }
+
+    let checkSize = (e) => {
+        let width = $(window).width();
+
+        if (width > 1310) {
+            $('#projects').css('padding-left', (50 + (width - 1310) / 2) + 'px');
+            $('#projects').css('padding-right', (50 + (width - 1310) / 2) + 'px');
+
+            $('#models').css('padding-left', (50 + (width - 1310) / 2) + 'px');
+            $('#models').css('padding-right', (50 + (width - 1310) / 2) + 'px');
+
+            let entities = $('.project');
+            handleEntities(entities, 3);
+
+            entities = $('.model');
+            handleEntities(entities, 3);
+
+            
+            
+        }else if (width > 802) {
+            $('#projects').css('padding-left', (50 + (width - 910) / 2) + 'px');
+            $('#projects').css('padding-right', (50 + (width - 910) / 2) + 'px');
+
+            $('#models').css('padding-left', (50 + (width - 910) / 2) + 'px');
+            $('#models').css('padding-right', (50 + (width - 910) / 2) + 'px');
+            
+            let entities = $('.project');
+            handleEntities(entities, 2);
+
+            entities = $('.model');
+            handleEntities(entities, 2);
+
+        }else {
+            let entities = $('.project');
+             handleEntities(entities, 1);
+
+             entities = $('.model');
+             handleEntities(entities, 1);
+        }
+    }
+
+    $(document).ready(checkSize);
+
+    $(window).resize(checkSize)
+</script>
 
 <script src = "./weights.js"></script>
 
@@ -223,8 +357,19 @@
 
         let scaledPos = (e.clientX - width / 2) / (width / 2) * 3;
         targetTarget = scaledPos; 
-    });
+    
+        let target = $(e.target);
+        if (target.hasClass("olink")) {
+            let linkBlock = $('#link-block');
+            linkBlock.css('top', (e.clientY  - 45) + 'px');
+            linkBlock.css('left', (e.clientX + 8) + 'px');
 
+            linkBlock.text(target.attr('ref'))
+        }else{
+            let linkBlock = $('#link-block');
+            linkBlock.css('top', '-100px');
+        }
+    });
 
     let state = [
         (Math.random() - 0.5) * 2 * 2.,
@@ -250,7 +395,7 @@
         return (Math.exp(2 * x) - 1) / ( Math.exp(2  *x) + 1);
     }
 
-    let temperature = 5;
+    let temperature = 2;
 
     let model = (obs) => {
         // obs -> 5 vector
