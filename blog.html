@@ -1,0 +1,234 @@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<link rel = 'stylesheet' href = 'https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.1/css/materialize.min.css'>
+<script src = 'https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.1/js/materialize.min.js'></script>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=DM+Serif+Text&display=swap" rel="stylesheet">
+
+<script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
+
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Text&display=swap" rel="stylesheet">
+
+
+<head><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=3.0, user-scalable=yes" />
+    <meta charset="utf-8">
+
+    <title>Nathan Yan</title>
+    <meta name="description" content="Nathan Yan's got a personal website!">
+    <meta name="author" content="Nathan Yan">
+  
+    <link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="./favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="./favicon-16x16.png">
+    <link rel="manifest" href="./site.webmanifest">
+
+    <link rel = 'stylesheet' type = 'text/css' href = './style.css'></style>
+</head>
+
+<style>
+    .text-block {
+        margin-left: 0px;
+    } 
+
+    .blog-img {
+        width: 300px;
+        
+
+        border: 0px black solid;
+
+        object-fit: cover;
+        opacity: 1;
+    }
+
+    .blog-text {
+        width: 300px;
+
+        font-size: 20px;
+
+        background: #ffffff;
+        padding: 15px 20px 15px 0px;
+        
+    }
+
+    .text-left {
+        left: -100px;
+    }
+
+    .blog-post {
+        position: relative;
+        margin-right: 75px;
+        margin-bottom: 75px;
+
+        cursor: pointer;
+    }
+
+    .blog-preview {
+        font-size: 15px;
+    }
+
+    b {
+        font-weight: 500;
+    }
+ </style>
+ 
+
+<html style = 'width: 100%; height: 100%'>
+    <body style = 'width: 100%; height: 100%'>
+        <div style = 'padding: 100px; background: white' id = 'intro'>
+            <div class = 'text-block' >
+                <h3>Blog</h3>
+                           </div>
+
+            <div style = 'display: flex; flex-wrap: wrap; width: 100%; margin-top: 50px'>
+
+                <div class = 'olink blog-post' ref = 'read more'>
+                    <img class = 'blog-img' src = 'https://nathan-yan.github.io/fractals/fractals/fractal13_.png'>
+                    <div class = 'blog-text'><b>Generating fractals with complex "neural networks".</b> <p class = 'blog-preview'>Fractals like the Mandelbrot Set are traditionally defined by a pretty simple recursive function. What if instead of a simple user-defined function we initiated a random neural network, and used that as the function?</p></div>
+                </div>
+
+                <div class = 'olink blog-post' ref = 'read more'>
+                    <img class = 'olink blog-img' src = './assets/ntm.png'>
+                    <div class = 'olink blog-text'><b>Neural Turing Machines, explained.</b> <p class = 'blog-preview'>Most neural networks have no, or very limited memory. Networks like LSTMs are able to use their hidden state to store data, but will forget over time. How can we create a neural network that theoretically never forgets, but is still trainable through gradient descent?</p></div>
+                </div>
+
+                <div class = 'blog-post' ref = 'read more' style = 'margin-right: 0'>
+                    <img class = 'olink blog-img' src = './assets/visual-attention2.PNG'>
+                    <div class = 'olink blog-text'><b>Psuedo-gradients for hard attention.</b> <p class = 'blog-preview'>Soft attention is the more common route for attention because it can be trained using gradient descent, rather than slower and more fragile methods like policy gradients. What if we could produce useful gradients from a hard attention mechanism, so it can be trained using SGD?</p></div>
+                </div>
+
+                <div class = 'blog-post' ref = 'read more' >
+                    <img class = 'olink blog-img' src = './assets/draw.gif'>
+                    <div class = 'olink blog-text'><b>Deep Recurrent Attentive Writer, explained.</b> <p class = 'blog-preview'>Soft attention is the more common route for attention because it can be trained using gradient descent, rather than slower and more fragile methods like policy gradients. What if we could produce useful gradients from a hard attention mechanism, so it can be trained using SGD?</p></div>
+                </div>
+
+                <div class = 'blog-post' ref = 'read more' >
+                    <img class = 'olink blog-img' src = './assets/ap_history! - Copy.PNG'>
+                    <div class = 'olink blog-text'><b>Thoughts on the 2020 AP exams.</b> <p class = 'blog-preview'>Soft attention is the more common route for attention because it can be trained using gradient descent, rather than slower and more fragile methods like policy gradients. What if we could produce useful gradients from a hard attention mechanism, so it can be trained using SGD?</p></div>
+                </div>
+            </div>
+           
+        </div>
+
+        <div id = 'link-block'></div>
+
+
+    </body>
+</html>
+
+<script>
+    let handleEntities = (entities, n) => {
+        entities.map((idx, ent) => {
+        ent = $(ent);
+        if (idx % n == 0){
+            if (n == 1){ 
+                ent.find('.text')[0].className = 'text text-center';
+                ent.css('margin-right', '0px');
+            }else{
+                ent.find('.text')[0].className = 'text text-right';
+                ent.css('margin-right', '150px');
+            }
+        }else if (idx % n == 1){
+            if (n == 2){
+                ent.find('.text')[0].className = 'text text-left';
+                ent.css('margin-right', '0px');
+            }else{
+                ent.find('.text')[0].className = 'text text-center';
+                ent.css('margin-right', '150px');    
+            }
+        }else if (idx % 3 == 2){
+            ent.find('.text')[0].className = 'text text-left';
+            ent.css('margin-right', '0px');
+        }
+    })
+
+        if (n == 2 && entities.length % 2) {
+            $(entities[entities.length - 1]).find('.text')[0].className = 'text text-center';
+            $(entities[entities.length - 1]).css('margin-right', '0px');
+        }
+
+        else if (n == 3 && entities.length % 3 == 1) {
+            $(entities[entities.length - 1]).find('.text')[0].className = 'text text-center';
+            $(entities[entities.length - 1]).css('margin-right', '0px');
+        }else if (n == 3 && entities.length % 3 == 2) {
+            $(entities[entities.length - 1]).find('.text')[0].className = 'text text-left';
+                
+            $(entities[entities.length - 1]).css('margin-right', '0px');
+        }
+
+    }
+
+    let checkSize = (e) => {
+        let width = $(window).width();
+
+        if (width > 1310) {
+            $('#projects').css('padding-left', (50 + (width - 1310) / 2) + 'px');
+            $('#projects').css('padding-right', (50 + (width - 1310) / 2) + 'px');
+
+            $('#models').css('padding-left', (50 + (width - 1310) / 2) + 'px');
+            $('#models').css('padding-right', (50 + (width - 1310) / 2) + 'px');
+
+            let entities = $('.project');
+            handleEntities(entities, 3);
+
+            entities = $('.model');
+            handleEntities(entities, 3);
+
+            
+            
+        }else if (width > 802) {
+            $('#projects').css('padding-left', (50 + (width - 910) / 2) + 'px');
+            $('#projects').css('padding-right', (50 + (width - 910) / 2) + 'px');
+
+            $('#models').css('padding-left', (50 + (width - 910) / 2) + 'px');
+            $('#models').css('padding-right', (50 + (width - 910) / 2) + 'px');
+            
+            let entities = $('.project');
+            handleEntities(entities, 2);
+
+            entities = $('.model');
+            handleEntities(entities, 2);
+
+        }else {
+            let entities = $('.project');
+             handleEntities(entities, 1);
+
+             entities = $('.model');
+             handleEntities(entities, 1);
+        }
+    }
+
+    $(document).ready(checkSize);
+
+    $(window).resize(checkSize)
+</script>
+
+<script src = "./weights.js"></script>
+
+<script>
+    $(document).mousemove((e) => {
+     
+        let width = $(window).width();
+        let pos = e.clientX;
+
+        let scaledPos = (e.clientX - width / 2) / (width / 2) * 3;
+        targetTarget = scaledPos; 
+    
+        let target = $(e.target);
+        
+        
+    });
+
+    $('.olink').mousemove((e) => {
+        let linkBlock = $('#link-block');
+        linkBlock.css('top', (e.clientY  - 45) + 'px');
+        linkBlock.css('left', (e.clientX + 8) + 'px');
+
+        linkBlock.text($(e.target).parent('.olink').attr('ref'));
+    })
+
+    $('.olink').mouseleave((e) => {
+        let linkBlock = $('#link-block');
+        linkBlock.css('top', '-100px');
+        
+    })
+        
+    
+</script>

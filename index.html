@@ -8,140 +8,7 @@
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Text&display=swap" rel="stylesheet">
 
 <style>
-    h3 {
-        font-family: "DM Mono";
-        font-weight: 400;
-    }
-
-    .serif {
-        font-family: 'DM Mono'; 
-        font-weight: 400;
-
-        width: 250px;
-    }
-
-    body {
-        font-family: "DM Mono";
-        font-size: 17px;
-        font-weight: 300;
     
-        overflow-y: scroll;
-        scrollbar-width: 0; /* Firefox */
-        -ms-overflow-style: none;  /* Internet Explorer 10+ */
-    }
-    body::-webkit-scrollbar { /* WebKit */
-        width: 2;
-        height: 0;
-    }
-
-
-    .text-block {
-        width: 400px;
-        margin-left: calc(50% - 200px); 
-    }
-
-    .text {
-        position: relative; 
-        width: 275px;
-        top: -50px;
-        left: 75px;
-
-        font-size: 20px;
-
-        background: #ffffff;
-        padding: 10px;
-        border-style: solid;
-        border-width: 2px;
-        border-color: black;
-    } 
-
-    @media only screen and (max-width: 600px) {
-        body {
-            font-size: 15px;
-        }
-
-        .text-block {
-            width: 250px;
-            margin-left: calc(50% - 125px);
-        }
-
-        h3 {
-            font-size: 2.5rem;
-        }
-
-        .text {
-            font-size: 17px;
-        }
-    }
-
-
-    .link {
-        background: linear-gradient(to bottom, #00000000 60%, #4b2e8322 40%);
-    }
-
-    .image {
-        width: 300px;
-        height: 300px;
-
-        object-fit: cover;
-
-        border-style: solid;
-        border-width: 2px;
-        border-color: black;
-
-    }
-
-  
-
-    .text-center {
-        top: -50px;
-        left: 12.5px;
-    }
-
-    .text-left {
-        top: -50px;
-        left: -50px;
-    }
-
-    .project {
-         }
-
-         a {
-             color: #2222ff;
-             text-decoration: none ;
-         }
-        
-    #cart {
-        width: 50px;
-        height: 20px;
-        background: red;
-
-        position: absolute; 
-        bottom:0;
-        left: -25px;
-    }
-
-    #pole {
-        width: 10px;
-        height: 80px;
-        background: blue;
-
-        position: absolute; 
-        bottom:10;
-        left: -5px;
-
-        transform-origin: 50% 100%;
-    }
-
-    #link-block {
-        position: fixed;
-        top: -100px;
-        
-        background: #101020;
-        color: white;
-        padding: 3px 7px;
-    }
-
 </style>
 
 <head><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=3.0, user-scalable=yes" />
@@ -150,21 +17,25 @@
     <title>Nathan Yan</title>
     <meta name="description" content="Nathan Yan's got a personal website!">
     <meta name="author" content="Nathan Yan">
+    <meta name = "keywords" content= "Nathan Yan, Nathan, Yan, Christopher, Nathan Christopher Yan">
+
   
     <link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="./favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="./favicon-16x16.png">
     <link rel="manifest" href="./site.webmanifest">
+
+    <link rel = 'stylesheet' type = 'text/css' href = './style.css'>
 </head>
 
 <html style = 'width: 100%; height: 100%'>
     <body style = 'width: 100%; height: 100%'>
         <div style = 'height: fit-content; min-height: 100%; display:flex; align-items: center; padding: 50px; background: white' id = 'intro'>
             <div class = 'text-block' >
-                <h3>Hi!</h3>
+                <h3>Hello!</h3>
                 <p style = 'margin-top: -15px; color: #2222ff; font-weight: 400'><a ref = "assets/resume.pdf" href = 'assets/resume.pdf' class = 'olink'>résumé</a> · <a ref = "mailto:nathancy@uw.edu" href = 'mailto:nathancy@uw.edu' class = 'olink'>nathancy[at]uw[dot]edu</a></p>
                 <p>My name is <span style = 'font-weight: 500'>Nathan Yan</span>. I am an incoming freshman at the <a class = 'olink' href = 'https://cs.washington.edu' ref = 'cs.washington.edu'>Paul G. Allen School</a> at the <a href = 'https://washington.edu'><span class = 'olink link' ref = 'washington.edu' style = 'color: #4b2e83; font-weight: 500'>University of Washington</span></a>.</p>
-                <p>I love all things computer science. I have an particular interest in artificial intelligence, specifically deep reinforcement learning.</p>
+                <p>I love all things computer science, but I have a particular interest in artificial intelligence, especially in fields like deep reinforcement learning and computer vision.</p>
                 <p>Take a look at some of the things I've worked on over the years! ⬇️</p>
             </div>
 

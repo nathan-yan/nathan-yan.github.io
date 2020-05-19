@@ -1,0 +1,133 @@
+h3 {
+    font-family: "DM Mono";
+    font-weight: 400;
+}
+
+.serif {
+    font-family: 'DM Mono'; 
+    font-weight: 400;
+
+    width: 250px;
+}
+
+body {
+    font-family: "DM Mono";
+    font-size: 17px;
+    font-weight: 300;
+
+    overflow-y: scroll;
+    scrollbar-width: 0; /* Firefox */
+    -ms-overflow-style: none;  /* Internet Explorer 10+ */
+}
+body::-webkit-scrollbar { /* WebKit */
+    width: 2;
+    height: 0;
+}
+
+
+.text-block {
+    width: 400px;
+    margin-left: calc(50% - 200px); 
+}
+
+.text {
+    position: relative; 
+    width: 275px;
+    top: -50px;
+    left: 75px;
+
+    font-size: 20px;
+
+    background: #ffffff;
+    padding: 10px;
+    border-style: solid;
+    border-width: 2px;
+    border-color: black;
+} 
+
+@media only screen and (max-width: 600px) {
+    body {
+        font-size: 15px;
+    }
+
+    .text-block {
+        width: 250px;
+        margin-left: calc(50% - 125px);
+    }
+
+    h3 {
+        font-size: 2.5rem;
+    }
+
+    .text {
+        font-size: 17px;
+    }
+}
+
+
+.link {
+    background: linear-gradient(to bottom, #00000000 60%, #4b2e8322 40%);
+}
+
+.image {
+    width: 300px;
+    height: 300px;
+
+    object-fit: cover;
+
+    border-style: solid;
+    border-width: 2px;
+    border-color: black;
+
+}
+
+
+
+.text-center {
+    top: -50px;
+    left: 12.5px;
+}
+
+.text-left {
+    top: -50px;
+    left: -50px;
+}
+
+.project {
+     }
+
+     a {
+         color: #2222ff;
+         text-decoration: none ;
+     }
+    
+#cart {
+    width: 50px;
+    height: 20px;
+    background: red;
+
+    position: absolute; 
+    bottom:0;
+    left: -25px;
+}
+
+#pole {
+    width: 10px;
+    height: 80px;
+    background: blue;
+
+    position: absolute; 
+    bottom:10;
+    left: -5px;
+
+    transform-origin: 50% 100%;
+}
+
+#link-block {
+    position: fixed;
+    top: -100px;
+    
+    background: #101020;
+    color: white;
+    padding: 3px 7px;
+}
