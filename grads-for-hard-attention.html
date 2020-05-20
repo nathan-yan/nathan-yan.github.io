@@ -158,67 +158,103 @@
             <br/><br/>
 
             </div>
+            <div class = 'header'>
+                Soft and hard attention
+            </div>
 
+            
+            <div style = 'position: relative'>
+                <div class = 'text'>
+                    Attention in general is the ability for a network or model to select what it wants to process. This is really important in making models more interpretable, and has empirically shown to be extremely effective in improving model performance. In translation tasks, for example, it may be useful for the model to attend to different parts of the sentence for different words. The token <code>it</code> might refer to a subject mentioned previously in the sentence, so the network may attend somewhere in the past to form its translation.
+                </div>
+            
+                <div class = 'img'>
+                    <img src = './assets/attention.PNG' class = 'image'>
+                    <br/>
+                    <div style = ' font-size: 15px; text-align:justify; line-height: 17px; margin-top: 10px'>A classic example of attention for translation. The attention mostly corresponds word-for-word, except for the phrase "European Economic Area". In French, the phrase is written as "zone économique européene"--the words are backward. The alignment mechanism focuses its attention in the opposite order when generating the those three French words.</div>
+                </div>
+            </div>
+            
+            <div style = 'position: relative'>
+                <div class = 'text'>
+                    <br/>
+                    There are two types of attention, hard and soft. Hard is the easiest to explain, it simply chooses specific parts of the input to read and completely ignores the others. In an image setting, this might be something like cropping the image so you can focus on a smaller part of it. The rest of the image is essentially discarded. The important thing to note is that hard attention is usually on-off, all-or-nothing. This type of activation function is not differentiable, because it resembles a step function--where the gradient is zero for all \(x\) except for \(x = 0\), where the gradient is undefined. Intuitively, this is like saying we don't know what the cropped image would look like if we adjusted the attention location by a small amount. Since images have discrete pixels, it doesn't make sense to ask what the image would look like if we moved our crop to the left by \(\delta x \ll 1\). Because of this non-differentiability, hard-attention mechanisms have to be trained using RL methods like REINFORCE. The paper <a>Recurrent Models of Visual Attention</a> [Minh et al.,2015] is a landmark example in this type of RL training.
+                    <br/>
+                    <br/>
+                </div>
+                
+            </div>
 
+            <div style = 'position: relative'>
+                <div class = 'text'>
+                    Soft attention is when all parts of the input are processed, but different parts may be weighted less than others. A common soft attention mechanism is key-query matching, in which a network generates a series of key vectors that could represent tokens in a sentence, or vectors in some memory matrix, as well as a query vector. This query vector is compared to all the key vectors using some kind of similarity metric, like cosine similarity, these similarities are used to generate an attention vector that can be elementwise multiplied to all the tokens or memory matrix vectors. [add demo?]
+                    In the image setting soft attention can be achieved in multiple ways. One particularly cool method is gaussian filters, used in the paper <a>Deep Recurrent Attentive Writer</a> [Gregor et al.,2014]. Gaussian filters allows the network to actually reduce the dimensionality of its input.
+                    
+                </div>
+                <div class = 'img' style = 'top: initial; bottom: 0'>
+                    <img src = './assets/draw_filters.PNG' class = 'image' style = 'top: initial; bottom: 0'>
+                    <br/>
+                    <div style = ' font-size: 15px; text-align: justify; line-height: 17px; margin-top: 10px'>The DRAW model uses gaussian filters, which are centered around the green dots. Each green dot represents a pixel of the resulting image (in this case, the output will be a 3 x 3 patch of the larger image). You can imagine a 2-d gaussian with a variance parameterized by the neural network output centered around each of the dots. This 2-d gaussian represents the weight of each pixel, which you can dot product with the image to get the intensity of the corresponding output pixel.</div>
+                </div>
+            </div>
+
+            <br/>
+
+            <div style = 'position: relative'>
+                <div class = 'text'>
+                    Again the important takeaway is that because soft attention actually does process the entire image and involves purely differentiable functions, the whole attention operation is differentiable. This means it can be trained fairly easily with backpropagation. This is especially important for early learning, because soft attention mechanisms attend to the entire input, they receive a useful gradient signal no matter where it is. This may not be the case for hard attention mechanisms unless it happens to get lucky and attend to a salient patch of information. 
+                    <br/>
+                    <br/>
+                    So far it seems like soft attention is the clear winner because of its ability to be trained with backpropagation. However, hard attention still has multiple desirable properties, like increased efficiency and ease of implementation. One can imagine it would be easier it would be to implement cropping rather than generating filter banks for gaussian filters. In addition, since cropping is a very inexpensive operation, it would likely also save some compute for large images. As a result, hard attention still has some desirable properties.
+                    <br/><br/>
+                    The point of this project was basically to see if I could produce some learning signal for pure hard attention that could be SGD trainable. I say "pure" because <a>Spatial Transformer Networks</a> [Jaderberg.,2010] do something similar with subgradients of the linear interpolation function, because their sampling function actually does interpolate between adjacent pixels. My hard attention mechanism deals purely with integer crops. I also use subgradients of an interpolation function, but since that interpolation function doesn't actually exist I'm calling these "psuedo-gradients". However since Spatial Transformer Networks do actually lay much of the groundwork for this, I'd call this less of a project and more of a tutorial.
+                    
+                </div>
+                
+            </div>
+
+            <br/><br/>
+
+            <!--
             <div class = 'header'>
                 Backpropagation recap
             </div>
 
             <div style = 'position: relative'>
                 <div class = 'text'>
-                    A fractal is a type of abstract geometric object that contains segments which are usually copies of the original. This property is known as self-similarity. One well known fractal which exhibits this behavior perfectly is the <a href = 'https://en.wikipedia.org/wiki/Sierpi%C5%84ski_triangle'>Sierpinski triangle</a>
+                    Backpropagation is a way of propagating gradients from a loss to a bunch of leaf variables. These leaf variables are typically the parameters of a neural network, and the generated gradients describe the vector of steepest ascent of the loss w.r.t. the parameters. It is quite easy then to move in the direction of steepest <i>descent</i> by moving the parameters in the opposite direction. More formally, given a loss \(L\) and parameters \([\theta_0, \theta_1, \theta_2 \cdots \theta_n]\), backpropagation computes \([\frac{\partial{l}}{\partial{\theta_0}}, \frac{\partial{l}}{\partial{\theta_1}} \cdots \frac{\partial{l}}{\partial{\theta_n}}]\). The way these gradients are computed is through the chain rule. The rule for gradients in the 2-D case is that the derivative of a function \(f(g(x))\) w.r.t. \(x\) is \(\frac{\text{d}g}{\text{d}x} \cdot \frac{\text{d}f}{\text{d}g}\)
                     <br/><br/>
-                    Fractals are also typically characterized by "infinite detail", which means they can be zoomed into infinitely without any loss of intricacy. Fractals are known for their appearances in all kinds of places you wouldn't expect, including the coastlines of countries, the waves of oceans, and even in antenna design. One other interesting property of fractals is that they typically exhibit non-integer dimensionality, because of their self-similarity.
+                    It's pretty easy to extend this to the n-D case. If you have a function \(\textbf{f} : \mathbb{R}^N \mapsto \mathbb{R}^P\) and another function \(\textbf{g} :\mathbb{R}^M \mapsto \mathbb{R}^N\), the gradient of \(\textbf{f}(\textbf{g}(\textbf{v}))\) w.r.t. \(\textbf{v}\) is \((\textbf{J}_{\textbf{f}}^{\top})(\textbf{J}_{\textbf{g}})\), where \(\textbf{J}_{\textbf{f}}^{\top}\) is the transpose of the jacobian of \(\textbf{f}\) w.r.t. \(\textbf{g}\). This looks kinda nasty, and the more intuitive way of thinking about this is that you're calculating the contribution of each input \([v_0, v_1, \cdots v_M]^{\top}\) to each output of \(\textbf{g}\), then calculating the contribution of each output of \(\textbf{g}\) to each output of \(\textbf{f}\). Since each input \(v_m\) affected every output of \(\textbf{g}\), you need to sum up its contributions to each. Formally, this means for any output \(f_p\), its partial derivative w.r.t. some input \(v_m\) is
+
+                    
+
                 </div>
-                <div class = 'img' >
-                    <img src = './fractals/sierpinski.png' class = 'image'>
-                    <br/>
-                    <div style = ' font-size: 15px;'>The Sierpinski Triangle</div>
-                </div>
+
             </div>
 
-            <br/>
-            <br/>
+            <div class = 'eq'>
+                \(\frac{\partial{f_p}}{\partial{v_m}} = \sum_i{
+                    \frac{\partial{f_p}}{\partial{g_i}}\frac{\partial{g_i}}{\partial{v_m}}
+                }\)
+            </div>
+
+
+            <div>
+                    <div class = 'text'>
+                        If you do this for every input \(v_m\) and every output \(f_p\) you will get a \(P \times M\) matrix. This matches our vector form above because the jacobian \(\textbf{J}_{\textbf{g}}\) has shape \(N \times M\) and \(\textbf{J}_{\textbf{f}}\) has shape \(N \times P\). Taking the transpose of \(\textbf{J}_{\textbf{f}}\) and matrix multiplying it by \(\textbf{J}_{\textbf{g}}\) gives you a matrix with shape \(P \times M\). Try writing out the vector equation \(\textbf{J}_{\textbf{f}}^{\top}\textbf{J}_{\textbf{g}}\), and you'll notice it does the same thing as the sum form above!
+
+                    </div>
+
+            </div>-->
+
 
             <div class = 'header'>
-                The Mandelbrot Set
-            </div>
-
-            
-            <div style = 'position: relative'>
-                <div class = 'text'>
-                    The generation process of the Mandelbrot set is pretty simple. We start with a recursive function \(z_{t + 1} = z_{t}^2 + c\). As our base case, \(z_{0} = 0\). To plot the Mandelbrot set, each point on the complex coordinate plane is considered separately, and is the value of \(c\). 
-                </div>
-            
-                <div class = 'img'>
-                    <img src = './fractals/mandelbrot.png' class = 'image'>
-                    <br/>
-                    <div style = ' font-size: 15px;'>The Mandelbrot set</div>
-                </div>
-            </div>
-            
-            <div class = 'text'>
-                <br/>
-                For a quick refresher on the complex plane, \(i\) is the imaginary number, and satisfies the property that \(i^2 = -1\). Points on the complex plane are called complex numbers. To convert a real-valued coordinate to a complex number, you take the x-coordinate (the real part) and add it to the y-coordinate (the imaginary part) multiplied by \(i\).
-
-                For example, the point (3, 2) in the real plane is \(3 + 2i\). Complex numbers also have a magnitude, which is just their distance from the origin. It's very simple to compute--just convert the complex number back into a real point--and calculate its distance from the origin with \(\sqrt{x^2 + y^2}\).
-                <br/>
-                <br/>
-                To generate the Mandelbrot set, we look at all points on the complex plane. For each of these points, we evaluate the recursive function, plugging in the point as \(c\) and \(0\) for \(z_0\). We evaluate the recursive function for some number of iterations \(t\), and at time \(t\) we see if \(z_{t}\) has a magnitude above some threshold. If it is above the threshold, we paint the point white, otherwise we paint it black. In other words, if the value of \(z_{t}\) grows unbounded for a given \(c\), the point on the complex plane \(c\) is colored white, otherwise it is colored black. 
-                <br/>
-                <br/>
-                For the sake of realistic generation, we won't actually look at all points on the complex plane. Our view will be bounded, with both our imaginary and real axes typically within the range \([-1, 1]\) (there isn't much to see beyond that region).
-            </div>
-
-            <br/><br/>
-
-            <div class = 'header'>
-                Fractal generation
+                Gradient Mechanism
             </div>
 
 
             <div class = 'text'>
-                Different equations yield different kinds of fractals, and there are all kinds of different things you can try. The point of this project is to use a randomly generated "neural network" as a function (as a disclaimer, it's not really a neural network, because it doesn't try to solve a particular task. However, it does share many of the same aspects, like matrix multiplication and non-linearities) rather than a hand crafted one. Basically, what we're doing is turning our function.
+                Given some square crop \(I\) of an image you can also produce a crop one pixel up, down, left and right, which are called \(I^{up}, I^{down}, I^{left}, I^{right}\) respectively. For now let's just pretend we're dealing with a 1-D image, so only \(I^{left}\) and \(I^{right}\) will be considered. For a particular pixel of \(I\) we <i>assume</i> it interpolates linearly between its adjacent pixels. This ends up looking like a leaky RELU function, where the slopes represent whether the adjacent pixels are brighter or dimmer than the center pixel. The derivative of this leaky ReLU like function is the subderivative   
             </div>
             <div class = 'eq'>
                 \(z_{t + 1} = z_{t}^2 + c\)
