@@ -24,6 +24,16 @@ body::-webkit-scrollbar { /* WebKit */
     height: 0;
 }
 
+.pictures::-webkit-scrollbar {
+    display: none;
+  }
+  
+  /* Hide scrollbar for IE, Edge and Firefox */
+.pictures {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+  }
+
 
 .text-block {
     width: 400px;
@@ -45,14 +55,32 @@ body::-webkit-scrollbar { /* WebKit */
     border-color: black;
 } 
 
+#name {
+    display: flex;
+}
+
+.pictures {
+    position: relative; 
+    height: fit-content;
+    display: flex;
+    flex-wrap: wrap;
+    padding: 50px;
+    margin-top: 5px;
+    flex-direction: row;
+    flex-wrap:nowrap;
+    overflow: scroll;
+
+    align-items: center;
+}
+
 @media only screen and (max-width: 600px) {
     body {
         font-size: 15px;
     }
 
     .text-block {
-        width: 250px;
-        margin-left: calc(50% - 125px);
+        width: 300px;
+        margin-left: calc(50% - 150px);
     }
 
     h3 {
@@ -61,6 +89,19 @@ body::-webkit-scrollbar { /* WebKit */
 
     .text {
         font-size: 17px;
+    }
+
+    #name {
+        display:block !important;
+    }
+
+    .pictures {
+        padding: 50px 50px 50px 20px;
+    }
+
+    .film-image {
+        width: 90vw;
+        height: auto !important;
     }
 }
 
@@ -81,7 +122,15 @@ body::-webkit-scrollbar { /* WebKit */
 
 }
 
+.film-image {
+    height: 65vh;
+    align-self: center;
+}
 
+.picture {
+    margin-right: 30px;
+    margin-left: 30px;
+}
 
 .text-center {
     top: -50px;

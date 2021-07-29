@@ -31,11 +31,19 @@
 <html style = 'width: 100%; height: 100%'>
     <body style = 'width: 100%; height: 100%'>
         <div style = 'height: fit-content; min-height: 100%; display:flex; align-items: center; padding: 50px; background: white' id = 'intro'>
+           
             <div class = 'text-block' >
-                <h3>Hello!</h3>
-                <p style = 'margin-top: -15px; color: #2222ff; font-weight: 400'><a ref = "assets/resume.pdf" href = 'assets/resume.pdf' class = 'olink'>résumé</a> · <a ref = "mailto:nathancy@uw.edu" href = 'mailto:nathancy@uw.edu' class = 'olink'>nathancy@uw.edu</a></p>
-                <p>My name is <span style = 'font-weight: 500'>Nathan Yan</span>. I am an incoming freshman at the <a class = 'olink' href = 'https://cs.washington.edu' ref = 'cs.washington.edu'>Paul G. Allen School</a> at the <a href = 'https://washington.edu'><span class = 'olink link' ref = 'washington.edu' style = 'color: #4b2e83; font-weight: 500'>University of Washington</span></a>.</p>
-                <p>I love all things computer science, but I have a particular interest in artificial intelligence, especially in fields like deep reinforcement learning and computer vision.</p>
+                <div id = 'name' style = 'align-items: center; '>
+                    <img style = "width: 100px; height: 100px;border-width: 0px; border-style: solid; margin-right: 10px" src= 'assets/profile.jpg'/>
+                    
+                    <div>
+                        <h3>Hello!</h3>
+                        <p style = 'margin-top: -15px; color: #2222ff; font-weight: 400'><a ref = "assets/resume.pdf" href = 'assets/resume.pdf' class = 'olink'>résumé</a> · <a ref = "mailto:nathancy@cs.uw.edu" href = 'mailto:nathancy@cs.uw.edu' class = 'olink'>nathancy@cs.uw.edu</a></p>
+                    </div>
+                    
+                </div>
+                <p>My name is <span style = 'font-weight: 500'>Nathan Yan</span>. I am a sophomore at the <a class = 'olink' href = 'https://cs.washington.edu' ref = 'cs.washington.edu'>Paul G. Allen School</a> at the <a href = 'https://washington.edu'><span class = 'olink link' ref = 'washington.edu' style = 'color: #4b2e83; font-weight: 500'>University of Washington</span></a>.</p>
+                <p>I love all things computer science, but I have a particular interest in artificial intelligence, especially in fields like natural language processing and computer vision.</p>
                 <p>Take a look at some of the things I've worked on over the years! ⬇️</p>
             </div>
 
@@ -118,9 +126,120 @@
 
 
             </div>
+
+            <div class = 'text-block' style = 'margin-top: 100px'>
+                <h3>Film Photography.</h3>
+                <p>I think film is such an interesting medium! Hoping to someday incorporate Polaroid and medium format.</p>
+            </div>
+
+            <div class = 'text-block' style = ' margin-top: 100px; font-size: 12px'><b>Preface</b><br/><br/>These photos are not supposed to be "good" in any traditional sense, or even in any non-traditional sense. They're mostly an experiment for myself to explore older methods of photography, as well as be more hands on (literally!) and cautious about the photos I take.</div>
+
+            <div class = 'text-block' style = 'margin-top: 100px; font-size: 12px'>
+                <b>Roll 0: October 2020 - Mar 2021, Ilford HP5</b>
+                <br/><br/>
+                Since this roll was taken during the school year, a lot of my photos were taken at UW, and this will likely be a recurring theme in the future.
+                <br/><br/>
+                This roll was self-developed, and some photos gained post-processing artifacts because of the way I handled them. Obviously not perfect but I thought it looked cool :)
+                <br/><br/>
+                Also at this point I hadn't figured out the specifics of the scanning system (using my laptop screen as backlight while I took pictures with a macro lens) so you can sometimes see the pixels of my laptop.
+            </div>
+
+            <div class = 'pictures'>
+                <div class = 'picture' style = ''>
+                    <img class = 'film-image' ref = 'roll1' src = './assets/film/roll0_p1.jpg'></img>
+                    <div style = 'font-size: 10px; margin-top: 5px'>UW Red Square, Canon A-1 @ 50mm</div>
+                   
+                </div>
+                <div class = 'picture' style = ''>
+                    <img class = 'film-image' ref = 'roll1' src = './assets/film/roll0_p2.jpg'></img>
+                    <div style = 'font-size: 10px; margin-top: 5px'>Seattle Boat Launch, Canon A-1 @ 50mm</div>
+                   
+                </div>
+                <div class = 'picture' style = ''>
+                    <img class = 'film-image' ref = 'roll1' src = './assets/film/roll0_p5.jpg'></img>
+                    <div style = 'font-size: 10px; margin-top: 5px'>UW Willow Hall, Canon A-1 @ 50mm</div>
+                   
+                </div>
+                <div class = 'picture' style = ''>
+                    <img class = 'film-image' ref = 'roll1' src = './assets/film/roll0_p4.jpg'></img>
+                    <div style = 'font-size: 10px; margin-top: 5px'>UW Willow Hall, Canon A-1 @ 50mm</div>
+                   
+                </div>
+                <div class = 'picture' style = ''>
+                    <img class = 'film-image' ref = 'roll1' src = './assets/film/roll0_p3.jpg'></img>
+                    <div style = 'font-size: 10px; margin-top: 5px'>UW, Canon A-1 @ 50mm</div>
+                   
+                </div>
+            </div>
+
+            <div class = 'text-block' style = ' margin-top: 100px; font-size: 12px'>
+                <b>Roll 1: Mar - Jul 2021, Portra 400</b>
+                <br/><br/>
+                I was really excited to use color film, and it was a ton of fun seeing the photos after they were developed.
+                <br/><br/>
+                I also didn't self-develop this roll, because I was worried about messing up the chemistry since color film is generally trickier to get right.
+                <br/><br/>
+                In fact, I was so worried about ruining the film that I scanned them with the protective cover still on (shoutout to Omega Photo in Bellevue!), and you can see the lip of the cover on the photos! I thought it gave them a more personal, sentimental look to it so I decided not to edit them out.
+            </div>
+
+            <div class = 'pictures'>
+                <div class = 'picture' style = ''>
+                    <img class = 'film-image' ref = 'roll1' src = './assets/film/roll1_p1.jpg'></img>
+                    <div style = 'font-size: 10px; margin-top: 5px'>UW, Canon A-1 @ 50mm</div>
+                   
+                </div>
+
+                <div class = 'picture' style = ''>
+                    <img class = 'film-image' src = './assets/film/roll1_p2.jpg'></img>
+                    <div style = 'font-size: 10px; margin-top: 5px'>UW Red Square + Faint Mt. Rainier, Canon A-1 @ 50mm</div>
+                   
+                </div>
+
+                <div class = 'picture' style = ''>
+                    <img class = 'film-image' src = './assets/film/roll1_p3.jpg'></img>
+                    <div style = 'font-size: 10px; margin-top: 5px'>UW, Canon A-1 @ 50mm</div>
+                   
+                </div>
+
+                <div class = 'picture' style = ''>
+                    <img class = 'film-image' src = './assets/film/roll1_p4.jpg'></img>
+                    <div style = 'font-size: 10px; margin-top: 5px'>UW Quad, Canon A-1 @ 50mm</div>
+                   
+                </div>
+
+                <div class = 'picture' style = ''>
+                    <img class = 'film-image' src = './assets/film/roll1_p5.jpg'></img>
+                    <div style = 'font-size: 10px; margin-top: 5px'>UW Quad, Canon A-1 @ 50mm</div>
+                   
+                </div>
+
+                <div class = 'picture' style = ''>
+                    <img class = 'film-image' src = './assets/film/roll1_p6.jpg'></img>
+                    <div style = 'font-size: 10px; margin-top: 5px'>Pike Place, Canon A-1 @ 50mm</div>
+                   
+                </div>
+
+                <div class = 'picture' style = ''>
+                    <img class = 'film-image' src = './assets/film/roll1_p7.jpg'></img>
+                    <div style = 'font-size: 10px; margin-top: 5px'>Mount Si, Canon A-1 @ 50mm</div>
+                   
+                </div>
+
+                <div class = 'picture' style = ''>
+                    <img class = 'film-image' src = './assets/film/roll1_p8.jpg'></img>
+                    <div style = 'font-size: 10px; margin-top: 5px'>Rattlesnake Ridge, Canon A-1 @ 50mm</div>
+                   
+                </div>
+
+                <div class = 'picture' style = ''>
+                    <img class = 'film-image' src = './assets/film/roll1_p9.jpg'></img>
+                    <div style = 'font-size: 10px; margin-top: 5px'>Rattlesnake Ridge, Canon A-1 @ 50mm</div>
+                   
+                </div>
+            </div>
         </div>
 
-        <div style = 'margin-top: 100px; text-align: center; margin-bottom: 50px; width: 75%; margin-left: 12.5%'>
+        <div style = 'margin-top: 100px; text-align: center; padding-bottom: 50px; width: 75%; margin-left: 12.5%'>
         Nathan Yan :: <a ref = "assets/resume.pdf" href = 'assets/resume.pdf' class = 'olink'>résumé</a> · <a ref = "mailto:nathancy@uw.edu" href = 'mailto:nathancy@uw.edu' class = 'olink'>nathancy[at]uw[dot]edu</a> · <a ref = "github.com/nathan-yan" href = 'https://github.com/nathan-yan' class = 'olink'>github</a></div>
 
         <div id = 'link-block'></div>
@@ -188,7 +307,6 @@
             handleEntities(entities, 3);
 
             
-            
         }else if (width > 802) {
             $('#projects').css('padding-left', (50 + (width - 910) / 2) + 'px');
             $('#projects').css('padding-right', (50 + (width - 910) / 2) + 'px');
@@ -201,6 +319,7 @@
 
             entities = $('.model');
             handleEntities(entities, 2);
+           
 
         }else {
             let entities = $('.project');
@@ -208,6 +327,7 @@
 
              entities = $('.model');
              handleEntities(entities, 1);
+
         }
     }
 
