@@ -130,12 +130,13 @@
             <div class = 'text-block' style = 'margin-top: 100px'>
                 <h3>Film Photography.</h3>
                 <p>I think film is such an interesting medium! Hoping to someday incorporate Polaroid and medium format.</p>
+                <p>Click on a photo to scroll to it, or just scroll left to right if you're on touchpad/mobile.</p>
             </div>
 
             <div class = 'text-block' style = ' margin-top: 100px; font-size: 12px'><b>Preface</b><br/><br/>These photos are not supposed to be "good" in any traditional sense, or even in any non-traditional sense. They're mostly an experiment for myself to explore older methods of photography, as well as be more hands on (literally!) and cautious about the photos I take.</div>
 
             <div class = 'text-block' style = 'margin-top: 100px; font-size: 12px'>
-                <b>Roll 0: October 2020 - Mar 2021, Ilford HP5</b>
+                <b>Roll 0: October 2020 - Mar 2021, Ilford HP5 PLUS</b>
                 <br/><br/>
                 Since this roll was taken during the school year, a lot of my photos were taken at UW, and this will likely be a recurring theme in the future.
                 <br/><br/>
@@ -360,6 +361,15 @@
             linkBlock.css('top', '-100px');
         }
     });
+
+    $('.film-image').mouseup((e) => {
+        console.log("test!");
+        let target = $(e.target);
+        let parent = $(target.parent()).parent();
+        parent.animate({
+            scrollLeft: target.offset().left + parent.scrollLeft() - ($(window).width() - target.width())/2
+        }, 500);
+    })
 
     let state = [
         (Math.random() - 0.5) * 2 * 2.,

@@ -59,12 +59,17 @@ body::-webkit-scrollbar { /* WebKit */
     display: flex;
 }
 
+.picture {
+    cursor: pointer;
+}
+
 .pictures {
     position: relative; 
     height: fit-content;
     display: flex;
     flex-wrap: wrap;
     padding: 50px;
+    padding-right: 300px;
     margin-top: 5px;
     flex-direction: row;
     flex-wrap:nowrap;
