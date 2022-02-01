@@ -230,6 +230,16 @@
         width: 40px;
     }
 
+    #loading {
+        background: white;
+        width: 100vw;
+        height: 100vh;
+
+        position: fixed;
+        top: 0; left: 0;
+
+        z-index: 100;
+    }
    
 </style>
 
@@ -238,7 +248,11 @@
 
 <html>
     <body style = ''>
-
+        <div id='loading' style='display: flex; align-items: center'>
+            <div style='text-align: center; width: 40%; margin-left: 30%'>
+                Loading "Equipping neural networks with differentiable memory: Neural Turing Machines" ...
+            </div>
+        </div>
         <div id = 'content' class = '' style = ''>
             <div style = 'font-size: 40px; line-height: 50px; margin-bottom: 20px' class = 'header text'>Equipping neural networks with differentiable memory: Neural Turing Machines</div>
             <div style = 'font-size: 20px; margin-bottom: 100px; font-family:"DM Mono"; color: gray' class = ' text'>Jan 29, 2022</div>
@@ -818,7 +832,7 @@
         var color = interpolateLinearly(data, Greys);
         var r = Math.round(color[0] * 255);
         var g = Math.round(color[1] * 255);
-        var b = Math.round(color[2] * 255);
+        var b = Math.round(color[2] * 200 + 50);
 
         return 'rgb(' + r + ',' + g + ',' + b + ')';
     }
@@ -977,6 +991,10 @@
     }
 
     $(document).ready(() => {
+        setTimeout(() => {
+            $('#loading').css('display', 'none');
+        }, 1500);
+        
         setTimeout(() => {
         
             for (let r = 0; r < 5; r++) {
