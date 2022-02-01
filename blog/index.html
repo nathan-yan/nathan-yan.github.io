@@ -68,7 +68,7 @@
         font-weight: 500;
     }
 
-    a {
+    .blog-link {
         text-decoration: none;
         color: black;
     }
@@ -79,23 +79,24 @@
     <body style = 'width: 100%; height: 100%'>
         <div style = 'padding: 100px; background: white' id = 'intro'>
             <div class = 'text-block' >
+                <a class='olink' ref='/' href='/'>Back to home</a>
                 <h3>Nathan's corner</h3>
                 <div>It's a technical blog! Or is it...</div>
                            </div>
 
             <div style = 'display: flex; flex-wrap: wrap; width: 100%; margin-top: 50px'>
                 
-                <a class='olink' ref='read more' href='https://nathancy.dev/fractals'>
-                    <div class = 'blog-post' href='https://nathancy.dev/fractals'>
+                <a class='blog-link' href='https://nathancy.dev/fractals'>
+                    <div class = 'olink blog-post' ref='read more' href='https://nathancy.dev/fractals'>
                         <img class = 'blog-img' src = 'https://nathan-yan.github.io/fractals/fractals/fractal13_.png'>
                         <div class = 'blog-text'><b>Generating fractals with complex "neural networks".</b> <p class = 'blog-preview'>Fractals like the Mandelbrot Set are traditionally defined by a pretty simple recursive function. What if instead of a simple user-defined function we initiated a random neural network, and used that as the function?</p></div>
                     </div>
                 </a>
 
-                <a class='olink' ref='read more' href='https://nathancy.dev/ntm'>
+                <a class='blog-link' href='https://nathancy.dev/ntm'>
                     <div class = 'olink blog-post' ref = 'read more'>
-                        <img class = 'olink blog-img' src = '../assets/ntm.PNG'>
-                        <div class = 'olink blog-text'><b>Equipping neural networks with differentiable memory: Neural Turing Machines.</b> <p class = 'blog-preview'>Most neural networks are unable to remember, and those that can cannot remember for long. Networks like LSTMs are able to use their hidden state to store data, but will forget over time. How can we create a neural network that theoretically never forgets, but is still trainable through gradient descent?</p></div>
+                        <img class = 'blog-img' src = '../assets/ntm.PNG'>
+                        <div class = 'blog-text'><b>Equipping neural networks with differentiable memory: Neural Turing Machines.</b> <p class = 'blog-preview'>Most neural networks are unable to remember, and those that can cannot remember for long. Networks like LSTMs are able to use their hidden state to store data, but will forget over time. How can we create a neural network that theoretically never forgets, but is still trainable through gradient descent?</p></div>
                     </div>
                 </a>
             
@@ -217,7 +218,11 @@
         linkBlock.css('top', (e.clientY  - 45) + 'px');
         linkBlock.css('left', (e.clientX + 8) + 'px');
 
-        linkBlock.text($(e.target).parent('.olink').attr('ref'));
+
+
+        let text = $(e.target).parent('.olink').attr('ref') || $(e.target).attr('ref');
+
+        linkBlock.text(text);
     })
 
     $('.olink').mouseleave((e) => {

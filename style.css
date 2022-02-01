@@ -163,16 +163,20 @@ body::-webkit-scrollbar { /* WebKit */
     position: absolute; 
     bottom:0;
     left: -25px;
+
+    border-radius: 5px;
 }
 
 #pole {
     width: 10px;
-    height: 80px;
+    height: 70px;
     background: blue;
 
     position: absolute; 
     bottom:10;
     left: -5px;
+
+    border-radius: 100px;
 
     transform-origin: 50% 100%;
 }
