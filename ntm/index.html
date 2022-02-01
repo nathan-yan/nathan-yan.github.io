@@ -270,7 +270,7 @@
 
             <div style = 'position: relative'>
                 <div class = 'text'>
-                    The <a href = "https://arxiv.org/pdf/1410.5401.pdf">Neural Turing Machine (NTM)</a> is based on the <a href = 'https://en.wikipedia.org/wiki/Turing_machine'>Turing machine</a>, first introduced by Alan Turing in 1936. A Turing machine is a theoretical machine that consists of an infinitely long "memory tape", on which the Turing machine can read and write bits from, based on a set of rules. What's special about the Turing machine is that, despite it's simplicity, it's able to simulate or run any algorithm you give it. Recurrent Neural Networks have been proven to be Turing complete, meaning that they can do anything a Turing machine can. However, Turing complete behavior often cannot be learned by an RNN through gradient descent, and the nature of an RNN's Turing completeness is mostly just theoretical.
+                    The <a href = "https://arxiv.org/pdf/1410.5401.pdf">Neural Turing Machine (NTM)</a> is based on the <a href = 'https://en.wikipedia.org/wiki/Turing_machine'>Turing machine</a>, first introduced by Alan Turing in 1936. A Turing machine is a theoretical machine that consists of an infinitely long "memory tape", on which the Turing machine can read and write bits from, based on a set of rules. What's special about the Turing machine is that, despite its simplicity, it's able to simulate or run any algorithm you give it. Recurrent Neural Networks have been proven to be Turing complete, meaning that they can do anything a Turing machine can. However, Turing complete behavior often cannot be learned by an RNN through gradient descent, and the nature of an RNN's Turing completeness is mostly just theoretical.
                 </div>
                 <div class = 'img' >
                     <img src = './turing-machine.gif' class = 'image'>
@@ -301,7 +301,7 @@
             
             <div style = 'position: relative'>
                 <div class = 'text'>
-                    The main importance of external memory is that it's expandable. In a LSTM, each cell neuron requires it's own set of weights. We can't just add more cells to give it more memory, because that would require retraining the network. However, external memory is not explicitly connected to the NTM, so we can make our memory as large as we need to, and the network won't even notice.
+                    The main importance of external memory is that it's expandable. In a LSTM, each cell neuron requires its own set of weights. We can't just add more cells to give it more memory, because that would require retraining the network. However, external memory is not explicitly connected to the NTM, so we can make our memory as large as we need to, and the network won't even notice.
                     <br/><br/>
                     Another important aspect of external memory is that it's big. A LSTM has a single cell vector for passing data from previous timesteps. If it wants to remember two things at once, it has to learn an appropriate representation for <i>both</i> elements at once. However, with external memory, the NTM can just learn representations for each individual element, and write them to different parts of the memory.
                 </div>
@@ -823,16 +823,25 @@
         return [enforceBounds(r), enforceBounds(g), enforceBounds(b)];
     }
 
-    const getColor = (data, negative) => {
+    const getColor = (data, negative, interpolate=undefined) => {
         if (negative) {
             data += 1;
             data /= 2;
         }
 
-        var color = interpolateLinearly(data, Greys);
-        var r = Math.round(color[0] * 255);
-        var g = Math.round(color[1] * 255);
-        var b = Math.round(color[2] * 200 + 50);
+        let r; 
+        let g; 
+        let b;
+        if (interpolate) {
+            r = interpolate[0] * data + 255 * (1 - data)
+            g = interpolate[1] * data + 255 * (1 - data)
+            b = interpolate[2] * data + 255 * (1 - data) 
+        } else {
+            let color = interpolateLinearly(data, Greys);
+            r = Math.round(color[0] * 255);
+            g = Math.round(color[1] * 255);
+            b = Math.round(color[2] * 255);
+        }
 
         return 'rgb(' + r + ',' + g + ',' + b + ')';
     }
@@ -1330,13 +1339,13 @@ $('#copy-task-step').mousedown(() => {
             ) 
         }
         $('#copy-task-input').append(
-            $(`<div class='cell filled'></div>`)
+            $(`<div class='cell filled' style='background: #B20404'></div>`)
         ) 
     } else if (demo6Progress < demo6SequenceLength) { 
         for (let j = 0; j < 6; j++) {
             if (Math.random() > 0.5) {
                 $('#copy-task-input').append(
-                    $(`<div class='cell filled'></div>`)
+                    $(`<div class='cell filled' style='background: #6B68E5'></div>`)
                 )
                 col.push(1.);
             } else {
@@ -1394,7 +1403,7 @@ $('#copy-task-step').mousedown(() => {
         let value = Math.min(1, Math.max(0, result[3][0][i]));
 
         $('#copy-task-output').append(
-            $(`<div class='cell' style='background: ${getColor(value)}'>`)
+            $(`<div class='cell' style='background: ${getColor(value, false, [50, 124, 115])}'>`)
         );
     }
 
@@ -1515,8 +1524,16 @@ $('#ar-task-step').mousedown(() => {
     }
 
     for (let i = 0; i < 7; i++) {
+        let interpolate = [0, 0, 0];
+
+        if (inp[inp.length - 1] === 1.) {
+            interpolate = [178, 4, 4];
+        } else if (inp[inp.length - 2] !== 1.) {
+            interpolate = [107, 104, 229];
+        }
+
         $(`#ar-task-input`).append(
-            $(`<div class='cell' style='background: ${getColor(inp[i])}'>`)
+            $(`<div class='cell' style='background: ${getColor(inp[i], false, interpolate=interpolate)}'>`)
         )
     }
     let result = ntmForward([inp], demo7_ntm_memory, demo7_read_vector, demo7_prev_weights, ar_params, write_heads=3, read_heads=3);
@@ -1537,9 +1554,14 @@ $('#ar-task-step').mousedown(() => {
 
     for (let i = 0; i < 7; i++) {
         let value = Math.min(1, Math.max(0, result[3][0][i]));
+        let interpolate = [0, 0, 0];
+
+        if (demo7Progress >= demo7InputSequence.length && demo7Progress < demo7InputSequence.length + 3) {
+            interpolate = [50, 124, 115];
+        }
 
         $('#ar-task-output').append(
-            $(`<div class='cell' style='background: ${getColor(value)}'>`)
+            $(`<div class='cell' style='background: ${getColor(value, false, interpolate)}'>`)
         );
     }
 
