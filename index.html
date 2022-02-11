@@ -2,16 +2,17 @@
 <link rel = 'stylesheet' href = 'https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.1/css/materialize.min.css'>
 <script src = 'https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.1/js/materialize.min.js'></script>
 <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=DM+Serif+Text&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@200;300;400;500&display=swap" rel="stylesheet">
 
 <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
 
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Text&display=swap" rel="stylesheet">
 
 <style>
-    
+   
 </style>
 
-<head><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=3.0, user-scalable=yes" />
+<head><meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=3.0, user-scalable=yes" />
     <meta charset="utf-8">
 
     <title>Nathan Yan</title>
@@ -28,27 +29,62 @@
     <link rel = 'stylesheet' type = 'text/css' href = './style.css?v=2'>
 </head>
 
-<html style = 'width: 100%; height: 100%'>
-    <body style = 'width: 100%; height: 100%'>
+<html style = 'width: 100%; height: 100%; background: white'>
+    <body style = 'width: 100%; height: 100%; overflow-x: hidden'>
+        <div style='position: absolute; top: 25px; left: 0px; text-align: center; width: 100%; mix-blend-mode: difference; color: #fff; z-index: 1001'>
+            
+        </div>
+
         <div style = 'height: fit-content; min-height: 100%; display:flex; align-items: center; padding: 50px; background: white' id = 'intro'>
            
-            <div class = 'text-block' >
-                <div id = 'name' style = 'align-items: center; '>
-                    <img style = "width: 100px; height: 100px;border-width: 0px; border-style: solid; margin-right: 10px" src= 'assets/profile.jpg'/>
-                    
+            <div class = 'text-block-wide' >
+                <div id = 'name' style = 'align-items: center; position: relative'>
+                    <img style = "width: 170px; height: 170px;border-width: 0px; border-style: solid; margin-right: 10px; margin-bottom: 30px; margin-top: 50px" src= 'assets/profile.jpg'/>
+
+                    <img style = 'width:150px; position: absolute; left: -100px; top: 60px' src='assets/arrow.svg' id='arrow-left'>
+                    <img style = 'width:150px; position: absolute; left: 105px; top: 60px' src='assets/arrow-alt.svg' id='arrow-right'>
+                     
+                    <!--
                     <div>
                         <h3>Hello!</h3>
                         <p style = 'margin-top: -15px; color: #2222ff; font-weight: 400'><a ref = "assets/resume.pdf" href = 'assets/resume_yan_oct28.pdf' class = 'olink'>résumé</a> · <a ref = "mailto:nathancy@cs.uw.edu" href = 'mailto:nathancy@cs.uw.edu' class = 'olink'>nathancy@cs.uw.edu</a></p>
-                    </div>
+                    </div> -->
                     
                 </div>
-                <p>My name is <span style = 'font-weight: 500'>Nathan Yan</span>. I am a sophomore at the <a class = 'olink' href = 'https://cs.washington.edu' ref = 'cs.washington.edu'>Paul G. Allen School</a> at the <a href = 'https://washington.edu'><span class = 'olink link' ref = 'washington.edu' style = 'color: #4b2e83; font-weight: 500'>University of Washington</span></a>.</p>
-                <p>I am currently a SWE intern at <a href='https://arine.io' ref='arine.io' class='olink'>Arine</a>, where I help develop medical recommendation rules to optimize patient care. I will be interning at <a href='https://twosigma.com' ref='twosigma.com' class='olink'>Two Sigma</a> in the summer, and at <a href='https://panopto.com' ref='panopto.com' class='olink'>Panopto</a> in the fall!</p>
-                <p>Take a look at some of the things I've worked on over the years! ⬇️</p>
+                <div style='font-family: "DM Mono"; margin-bottom: 30px' id='links'>
+                    <a class='olink' ref='/assets/resume.pdf' href='/assets/resume_yan_oct28.pdf'>résumé</a> · <a class='olink' ref='mailto:nathancy@cs.uw.edu' href='mailto:nathancy@cs.uw.edu'>nathancy@cs.uw.edu</a>
+                </div>
+                <p️>
+                I am a sophomore at the <a href = 'https://washington.edu'><span class = 'olink link' ref = 'washington.edu' style = 'color: #4b2e83;'>University of Washington</span></a>, studying computer science.
+                </p>
+                <p>
+                I love all things CS, but I have a particular hobby-like interest in Artificial Intelligence, especially in NLP and RL.
+                    <br/>
+                </p>
+                
+                <div style='position: relative; border-bottom: 2px solid black; height: 80px; margin-top: 0; margin-bottom: 40px' id='cartpole-parent'>
+                    <div id = 'cart'></div>
+                    <div id = 'pole'></div>
+                    <div id = 'target'></div>
+                    <div style='position: absolute; left: -70px; bottom: 0px; width: 150px; background-image:linear-gradient(to right, #ffff , #ffff,  #fff0); height: 80px; z-index: 100'></div>
+                    <div style='position: absolute; right: -70px; bottom: 0px; width: 150px; background-image:linear-gradient(to left, #ffff , #ffff,  #fff0); height: 80px; z-index: 100'></div>
+
+                    <div style='position: absolute; bottom: -25px; font-family: "DM Mono"; font-size: 10px; color: #aaa'>Move your mouse to direct Steve the <a class='olink olink-text olink-lower olink-left' ref='Steve is a small neural network trained with policy gradients on a modified cartpole task to navigate toward a target (the black dot)!'>cartpole</a>!</div>
+                </div>
+
+                <p>
+                    I am currently a SWE intern at <a class='olink' ref='arine.io' href='https://arine.io'>Arine</a>, where I help develop medical recommendation rules to optimize patient care. I will be interning at <a class='olink' ref='twosigma.com' href='https://twosigma.com'>Two Sigma</a> in the summer, and at <a class='olink' ref='panopto.com' href='https://panopto.com'>Panopto</a> in the fall!
+                </p>
+
+                <p>
+                    Take a look at some of the things I've worked on over the years! ⬇️
+                </p>
             </div>
 
-            <div id = 'cart'></div>
-            <div id = 'pole'></div>
+        </div>
+
+        <div style='text-align: center'>
+            <img style='width: 400px' src='./assets/squiggle.svg'>
         </div>
 
         <div style='padding-bottom: 80px; margin-top: 100px;'>
@@ -338,7 +374,7 @@
   
 
         <div style = 'margin-top: 100px; text-align: center; padding-bottom: 50px; width: 75%; margin-left: 12.5%'>
-        Nathan Yan :: <a ref = "assets/resume.pdf" href = 'assets/resume_yan_oct28.pdf' class = 'olink'>résumé</a> · <a ref = "mailto:nathancy@uw.edu" href = 'mailto:nathancy@uw.edu' class = 'olink'>nathancy[at]uw[dot]edu</a> · <a ref = "github.com/nathan-yan" href = 'https://github.com/nathan-yan' class = 'olink'>github</a></div>
+        Nathan Yan :: <a ref = "assets/resume.pdf" href = 'assets/resume_yan_oct28.pdf' class = 'olink'>résumé</a> · <a ref = "mailto:nathancy@uw.edu" href = 'mailto:nathancy@uw.edu' class = 'olink'>nathancy@cs.uw.edu</a> · <a ref = "github.com/nathan-yan" href = 'https://github.com/nathan-yan' class = 'olink'>github</a></div>
 
         <div id = 'link-block'></div>
 
@@ -441,20 +477,48 @@
     $(document).mousemove((e) => {
      
         let width = $(window).width();
+        let cartpoleParentWidth = $('#cartpole-parent').width();
         let pos = e.clientX;
 
-        let scaledPos = (e.clientX - width / 2) / (width / 2) * 3;
+        let scaledPos = (e.clientX - width / 2) / (cartpoleParentWidth / 2) * 3;
+
+        if (scaledPos > 2.5) scaledPos = 2.5;
+        if (scaledPos < -2.5) scaledPos = -2.5;
+
         targetTarget = scaledPos; 
     
         let target = $(e.target);
         if (target.hasClass("olink")) {
             let linkBlock = $('#link-block');
-            linkBlock.css('top', (e.clientY  - 45) + 'px');
-            linkBlock.css('left', (e.clientX + 8) + 'px');
+
+            let offsetY = -45;
+
+            if (target.hasClass("olink-lower")) {
+                offsetY = +20;
+            }
+
+            let offsetX = 8;
+
+            linkBlock.css('top', (e.clientY + offsetY) + 'px');
+
+            if (target.hasClass('olink-left')) {
+                linkBlock.css('left', '');
+                linkBlock.css('right', (width - (e.clientX)) + 'px');
+            } else {
+                linkBlock.css('right', '');
+                linkBlock.css('left', (e.clientX + 8) + 'px');
+            }
+
+            if (target.hasClass('olink-text')) {
+                linkBlock.addClass('olink-text-attr'); 
+            } else {
+                linkBlock.removeClass('olink-text-attr');
+            }
 
             linkBlock.text(target.attr('ref'))
         }else{
             let linkBlock = $('#link-block');
+            linkBlock.text('');
             linkBlock.css('top', '-100px');
         }
     });
@@ -492,7 +556,7 @@
         return (Math.exp(2 * x) - 1) / ( Math.exp(2  *x) + 1);
     }
 
-    let temperature = 2;
+    let temperature = 10;
 
     let model = (obs) => {
         // obs -> 5 vector
@@ -569,6 +633,7 @@
     }
 
     let pole = document.getElementById('pole');
+    let targetElement = document.getElementById('target');
     //console.log('yeet');
 
     let getRandomInt = (min, max) => {
@@ -595,12 +660,16 @@
         state[4] = (0.94) * state[4] + 0.06 * targetTarget;
 
         //console.log( "rotate(" + state[0] + "rad)");
-        let width = $(window).width();
-        let scale = $(window).width() / 6;
+        let width = $('#cartpole-parent').width();
+        let scale = $('#cartpole-parent').width() / 6;
 
         let translate = `translateX(${(state[0]) * scale + width / 2}px)`;
-        pole.style.transform = translate + " rotate(" + Math.round(state[2] * 180/Math.PI) + "deg)";
+        let translateTarget = `translateX(${state[4] * scale + width / 2}px)`;
+
+        pole.style.transform = translate + " rotate(" + Math.round(state[2] * 180/Math.PI * 1.1) + "deg)";
         cart.style.transform = translate;
+
+        targetElement.style.transform = translateTarget;
 
         if (Math.abs(state[0] - state[4]) < 0.2){
             cart.style.background = "darkgreen";

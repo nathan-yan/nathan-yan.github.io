@@ -1,5 +1,5 @@
 h3 {
-    font-family: "DM Mono";
+    font-family: "Crimson Pro";
     font-weight: 400;
 }
 
@@ -13,7 +13,7 @@ h3 {
 body {
     font-family: "DM Mono";
     font-size: 17px;
-    font-weight: 300;
+    font-weight: 200;
 
     overflow-y: scroll;
     scrollbar-width: 0; /* Firefox */
@@ -38,6 +38,21 @@ body::-webkit-scrollbar { /* WebKit */
 .text-block {
     width: 400px;
     margin-left: calc(50% - 200px); 
+}
+
+.text-block-wide {
+    width: 850px;
+    margin-left: calc(50% - 425px);
+
+    font-size: 40px;
+    font-family: "Crimson Pro";
+}
+
+.olink-text-attr {
+    width: 200px !important;
+    font-size: 12px;
+
+    text-align: right;
 }
 
 .text {
@@ -78,14 +93,109 @@ body::-webkit-scrollbar { /* WebKit */
     align-items: center;
 }
 
+
+#cart {
+    width: 50px;
+    height: 20px;
+    background: red;
+
+    position: absolute; 
+    bottom:0;
+    left: -25px;
+
+    border-radius: 5px;
+}
+
+#pole {
+    width: 10px;
+    height: 70px;
+    background: blue;
+
+    position: absolute; 
+    bottom:10;
+    left: -5px;
+
+    border-radius: 100px;
+
+    transform-origin: 50% 100%;
+}
+
+#target {
+    position: absolute;
+    bottom: 5px;
+    left: 0px;
+    width: 5px;
+    height: 5px;
+
+    background: white;
+    mix-blend-mode: difference;
+}
+
+#arrow-right {
+    display: none;
+}
+
+#links {
+    font-size: 18px;
+}
+
+@media only screen and (max-width: 1100px) {
+    .text-block-wide {
+        width: 600px;
+        margin-left: calc(50% - 300px);
+    
+        font-size: 40px;
+    }
+}
+
+@media only screen and (max-width: 800px) {
+    .text-block-wide {
+        width: 400px;
+        margin-left: calc(50% - 200px);
+
+        font-size: 30px;
+    }
+
+    #arrow-left {
+        display: none;
+    }
+
+    #arrow-right {
+        display: initial;
+    }
+}
+
 @media only screen and (max-width: 600px) {
     body {
         font-size: 15px;
     }
 
+    #links {
+        font-size: 15px;
+    }
+
+    #pole {
+        height: 50px;
+        width: 8px;
+        left: -9px;
+        bottom: 5px;
+    }
+
+    #cart {
+        width: 40px;
+        height: 17px;
+    }
+
     .text-block {
         width: 300px;
         margin-left: calc(50% - 150px);
+    }
+
+    .text-block-wide {
+        width: 300px;
+        margin-left: calc(50% - 150px);
+
+        font-size: 25px;
     }
 
     h3 {
@@ -112,7 +222,7 @@ body::-webkit-scrollbar { /* WebKit */
 
 
 .link {
-    background: linear-gradient(to bottom, #00000000 60%, #4b2e8322 40%);
+    background: linear-gradient(to bottom, #00000000 90%, #4b2e8322 40%);
 }
 
 .image {
@@ -154,37 +264,16 @@ body::-webkit-scrollbar { /* WebKit */
          color: #2222ff;
          text-decoration: none ;
      }
-    
-#cart {
-    width: 50px;
-    height: 20px;
-    background: red;
 
-    position: absolute; 
-    bottom:0;
-    left: -25px;
-
-    border-radius: 5px;
+.link-nostyle {
+    color: inherit;
 }
-
-#pole {
-    width: 10px;
-    height: 70px;
-    background: blue;
-
-    position: absolute; 
-    bottom:10;
-    left: -5px;
-
-    border-radius: 100px;
-
-    transform-origin: 50% 100%;
-}
-
 #link-block {
     position: fixed;
     top: -100px;
     
+    width: fit-content;
+
     background: #101020;
     color: white;
     padding: 3px 7px;
