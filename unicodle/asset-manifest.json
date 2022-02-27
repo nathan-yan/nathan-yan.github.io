@@ -1,16 +1,16 @@
 {
   "files": {
     "main.css": "/unicodle/static/css/main.b6d3ab49.css",
-    "main.js": "/unicodle/static/js/main.cc0c04cd.js",
+    "main.js": "/unicodle/static/js/main.d336c8d4.js",
     "static/js/787.ed1a6e66.chunk.js": "/unicodle/static/js/787.ed1a6e66.chunk.js",
     "static/media/ClearSans-Bold.woff": "/unicodle/static/media/ClearSans-Bold.6667568d17f2aa634ec0.woff",
     "index.html": "/unicodle/index.html",
     "main.b6d3ab49.css.map": "/unicodle/static/css/main.b6d3ab49.css.map",
-    "main.cc0c04cd.js.map": "/unicodle/static/js/main.cc0c04cd.js.map",
+    "main.d336c8d4.js.map": "/unicodle/static/js/main.d336c8d4.js.map",
     "787.ed1a6e66.chunk.js.map": "/unicodle/static/js/787.ed1a6e66.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.b6d3ab49.css",
-    "static/js/main.cc0c04cd.js"
+    "static/js/main.d336c8d4.js"
   ]
 }
