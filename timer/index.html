@@ -1,0 +1,85 @@
+<!doctype html>
+
+<html lang="en" style = 'height: 100%; width: 100%'>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Camdac Timer :)</title>
+  <meta name="description" content="">
+  <meta name="author" content="SitePoint">
+
+  <meta property="og:title" content="">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://www.sitepoint.com/a-basic-html5-template/">
+  <meta property="og:description" content="">
+  <meta property="og:image" content="image.png">
+
+  <link rel="icon" href="/favicon.ico">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
+  <link rel="stylesheet" href="css/styles.css?v=1.0">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Gaegu:wght@400;700&display=swap" rel="stylesheet">
+
+</head>
+
+<style>
+    body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        font-family: "Gaegu";
+        font-weight: 600;
+        font-size: 26px;
+
+        color: "#fff"
+    }
+</style>
+
+<body style='width:100%; height:100%; background:#D8F3FF; display: flex; align-items: center; flex-direction: column;' class='body'>
+    <img src='./backdrop2.svg' style='position: absolute; top: 0; left: 0; width: 100%; height:100%; object-fit: cover'>
+   
+    <span id='seconds' style="position: absolute; top: 50%; left: 47%; color: #222; transform: skew(12deg, 0deg)"></span>    
+    <span id='days' style="position: absolute; top: 56%; left: 48%; color: #222; transform: skew(23deg, 0deg)"></span>    
+</body>
+</html>
+
+<script>
+    let seconds = document.getElementById('seconds');
+    let days = document.getElementById('days');
+
+    const formatNumber = (number) => {
+        let stringNum = number + '';
+
+        if (stringNum.length === 6) {
+            stringNum = stringNum.slice(0, 3) + "," + stringNum.slice(3);
+        } else if (stringNum.length === 5) {
+            stringNum = stringNum.slice(0, 2) + "," + stringNum.slice(2);
+        } else if (stringNum.length === 4) {
+            stringNum = stringNnum.slice(0, 1) + "," + stringNum.slice(1);
+        } else {
+            
+        }
+
+        return stringNum;
+    }
+
+    setInterval(() => {
+        const timestamp = Date.now();
+        const referenceDate = 1661925600000;
+
+        const remaining = referenceDate - timestamp;
+        const secondsRemaining = remaining/1000;
+
+        let daysRemaining = secondsRemaining / (60 * 60 * 24) * 1000;
+        daysRemaining = Math.round(daysRemaining) / 1000;
+
+        seconds.innerText = formatNumber(Math.round(secondsRemaining)) + " s";
+        days.innerText = daysRemaining + ' days';
+    }, 1000);
+</script>
