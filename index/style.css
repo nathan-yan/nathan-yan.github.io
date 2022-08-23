@@ -278,3 +278,7 @@ body::-webkit-scrollbar { /* WebKit */
     color: white;
     padding: 3px 7px;
 }
+
+uni {
+    font-family: sans-serif;
+}
