@@ -1,9 +1,11 @@
 :Head: 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
  <script type="text/javascript" async
     src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML"></script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
 
   <link rel='stylesheet' href='include/atom-one-light.css'></link>
   <link rel='stylesheet' href='include/base.css'></link>
@@ -52,7 +54,7 @@ Image: ![An image of the first fractal I generated. It looks like a black blob i
 Way cooler than I expected. I then changed the program slightly so that instead of coloring a pixel black or white based on whether or not its value is greater than the threshold, it's colored based on how many iterations it took to exceed the threshold. This gets us an image that less grainy and shows how <i>quickly</i> a point grows unbounded.
 
 
-The fractal looks different because network weights were initialized at random. I later started recording the seeds (unfortunately I was pretty disorganized while making this, and I don't really know if the seeds correspond to their original images :/ )
+The fractal looks different because network weights were initialized at random. I later started recording the seeds (unfortunately I was pretty disorganized while making this, and I don't really know if the seeds correspond to their original images 😕)
 
 Image: ![An image of my second generated fractal, with smoothing.](assets/fractal2_.png "Smoothed version")
 
