@@ -47,6 +47,9 @@ class Parser:
       request=""
     )
 
+    # are we in a code block?
+    self.in_code = False
+
     self.content = div(id='content')
     self.document.body += self.content 
 
@@ -63,11 +66,13 @@ class Parser:
   def parse(self, filename):
     with open(filename, 'r') as f:
       lines = f.readlines()
-      lines = [l.strip() for l in lines]
+      lines = [l.replace('\n', '').replace('\r', '') for l in lines]
 
       for idx in range (len(lines)):
         line = lines[idx]
-        if not line:
+
+        # ignore blank lines, unless we're in a code block
+        if not line and not self.in_code:
           continue 
 
         for t in self.tags:
@@ -114,7 +119,7 @@ def generate_date(parser: Parser, content: str):
 
 @parser.process_for('Intro:')
 def generate_intro(parser: Parser, content: str):
-  parser.elements[-1] += div(content, cls='section intro')
+  parser.elements[-1] += div(raw(mistletoe.markdown(content)), cls='section intro')
 
 @parser.process_for(':Head:')
 def start_head(parser: Parser, content: str):
@@ -146,6 +151,32 @@ def start_raw(parser: Parser, content: str):
 def end_raw(parser: Parser, content: str):
   parser.parse_raw = True 
 
+@parser.process_for('```')
+def start_end_code(parser: Parser, content: str):
+  if parser.in_code:
+    # when parsing under the "defaulr" rule
+    # text has a newline prepended to it
+    # for code, we would like to remove this newline at the 
+    # beginning
+    parser.elements[-1][0] = str(parser.elements[-1][0])[1:] 
+
+    del parser.elements[-1]
+    parser.in_code = False 
+    parser.parse_raw = True
+  else:
+    language = content
+    if not language: language = 'plaintext'
+
+    pre_element = pre()
+    code_element = code(cls=f'language-{language}')
+
+    pre_element += code_element
+    parser.elements[-1] += pre_element
+
+    parser.elements.append(code_element)
+
+    parser.in_code = True
+    parser.parse_raw = False
 
 @parser.process_for("Image:", remove_prefix=False)
 def generate_image(parser: Parser, content: str):
@@ -174,7 +205,7 @@ def add_raw(parser: Parser, content: str):
     content = re.sub(r'\$(.*?)\$', r'\\\(\1\\\)', content)
     content = mistletoe.markdown(content)
   
-  content = raw('\n' + '\t' * len(parser.elements) + content)
+  content = raw('\n' + content)
 
   if parser.parse_raw:
     content = div(content)
