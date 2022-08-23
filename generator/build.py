@@ -41,7 +41,9 @@ args = parser.parse_args()
 class Parser:
   def __init__(self):
     self.tags = {}
+    self.reset()
 
+  def reset(self):
     self.document = document(
       title="Test",
       request=""
@@ -281,6 +283,7 @@ if __name__ == '__main__':
 
         with open(dest_filename, 'w') as f:
           f.write(parser.parse(filename).render())
+          parser.reset()
         
         # delete the markdown file
         os.remove(filename)
