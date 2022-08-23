@@ -1,0 +1,205 @@
+/* Base blog CSS file */
+body {
+    font-family: "Georgia", "Serif";
+    display: flex;
+    padding-bottom: 200px;
+    
+    overflow-x: hidden;
+}
+
+a {
+    -webkit-transition: all .5s ease;
+    -moz-transitition: all .5s ease;
+    -o-transition: all .5s ease;
+    transition: all .5s ease;
+
+    color: rgb(10, 100, 240);
+    border-bottom-color: rgb(240, 240, 240);
+    border-bottom-style: solid;
+
+    text-decoration: none;
+}
+
+a:hover {
+    border-bottom-color: rgb(50, 100, 240);
+}
+
+.eq {
+    text-align:center;
+    margin-top:15px;
+    margin-bottom: 15px
+}
+
+.prettyprint {
+    font-size:12px;
+}
+
+.button-a{
+      transition:0.2s all ease;
+    -webkit-transition:0.2s all ease;
+    -moz-transition:all 0.2s ease;
+    -o-transition:all 0.2s ease;
+
+    background-color: rgba(0, 0, 0, 0);
+    color:white
+}
+
+.button-a:hover{
+    background-color: rgba(255, 255, 255, .2);
+    color:white;
+}
+
+.title {
+    font-size: 40px; 
+    line-height: 50px;
+    margin-bottom: 20px;
+}
+
+.date {
+    font-family: "DM Mono";
+    color: #999;
+    margin-bottom: 100px;
+}
+
+.section{
+    font-size: 25px;
+    margin-bottom: 10px;
+    margin-top: 50px;
+}
+
+.intro {
+    line-height: 35px;
+}
+
+.subsection {
+    font-size: 20px; 
+    margin-bottom: -10px;
+    margin-top: 40px;
+    font-style: italic;
+}
+
+.demo-description {
+    font-size: 12px;
+    font-family: "inter";
+    font-weight: 500;
+    width: 50%;
+    line-height: 25px;
+
+    margin-top: 20px;
+    margin-bottom: 0px;
+    color: #777;
+}
+
+#content {
+    margin-left:14vw;
+    margin-top:50px;
+    font-family: "Georgia", "Segoe UI", "Lato";
+    font-size: 20px;
+    line-height:1.7em;
+    font-weight: 300;
+
+    width: 49vw;
+}
+
+.text {
+    width: 700px;
+}
+
+.img {
+    position: absolute;
+    width: 20vw;
+}
+
+.img-description {
+    font-size: 13px;
+    line-height: 22px;
+    display: block;
+
+    font-family: "inter";
+    font-weight: 500;
+    color: #777;
+}
+
+
+.button {
+    padding: 10px 20px;
+    background: #0000;
+    border: 2px solid black;
+    margin-top: 50px;
+
+    font-family: "inter";
+    font-weight: 600;
+
+    cursor: pointer;
+    user-select: none;
+
+    margin-right: 10px;
+}
+
+img {
+    max-width: 100%;
+}
+
+.button:hover {
+    background: #0001;
+}
+
+input {
+    text-decoration: none;
+    font-family: "Inter";
+    font-weight: 600;
+
+    font-size: 19px;
+    border: none;
+
+    background: #0000;
+    width: 40px;
+}
+
+#loading {
+    background: white;
+    width: 100vw;
+    height: 100vh;
+
+    position: fixed;
+    top: 0; left: 0;
+
+    z-index: 100;
+}
+
+@media only screen and (max-width: 1000px) {
+    .img {
+        position: static;
+        width: 100%;
+    }
+
+    #content {
+        width: 65vw;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    #content {
+        width: 78vw; 
+        font-size: 17px;
+        margin-left: 8vw;
+    }
+
+    .img-description {
+        font-size: 11px;
+    }
+
+    .demo-description {
+        width: 85%;
+        font-size: 11px;
+    }
+
+    .title {
+        font-size: 32px;
+        line-height: 45px;
+    }
+
+    .section {
+        font-size: 23px;
+    }
+}
