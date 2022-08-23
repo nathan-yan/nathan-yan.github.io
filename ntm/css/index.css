@@ -1,0 +1,46 @@
+#shift-left-5, #shift-noop-5, #shift-right-5 {
+  cursor: pointer;
+}
+
+#shift-left-5:hover, #shift-noop-5:hover, #shift-right-5:hover {
+  opacity: 0.5;
+}
+
+.demo-grid {
+  display: flex;
+  flex-wrap: wrap;
+  align-content: flex-start;
+  flex-direction: column;
+  flex-shrink: 0;
+}
+
+
+.cell {
+  width: 14px;
+  height: 14px;
+  background: white;
+}
+
+.cell-small {
+  width: 10px;
+  height: 10px;
+  background: white;
+  box-sizing: border-box;
+
+}
+
+.filled {
+  background: black;
+}
+
+@media only screen and (max-width: 600px) {
+  .cell {
+    width: 10px; 
+    height: 10px;
+  }
+
+  .cell-small {
+    width: 7px;
+    height: 7px;
+  }
+}

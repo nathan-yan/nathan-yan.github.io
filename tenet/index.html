@@ -1,0 +1,467 @@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<link rel = 'stylesheet' href = 'https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.1/css/materialize.min.css'>
+<script src = 'https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.1/js/materialize.min.js'></script>
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;700&display=swap" rel="stylesheet">
+
+<script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
+
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Text&display=swap" rel="stylesheet">
+
+<script src='./hammer.js'></script>
+
+<style>
+    
+</style>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=3.0, user-scalable=yes" />
+    <meta charset="utf-8">
+
+    <title>Nathan Yan</title>
+    <meta name="description" content="Nathan Yan's got a personal website!">
+    <meta name="author" content="Nathan Yan">
+    <meta name = "keywords" content= "Nathan Yan, Nathan, Yan, Christopher, Nathan Christopher Yan">
+
+    <!--
+    <link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="./favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="./favicon-16x16.png">
+    <link rel="manifest" href="./site.webmanifest">
+    -->
+
+    <link rel = 'stylesheet' type = 'text/css' href = './style.css'>
+</head>
+
+<style>
+    body {
+        font-family: "DM Sans";
+        color: white;
+    }
+
+    #map-container {
+        cursor: pointer;
+        position: relative;
+    }
+
+    #map {
+        position: absolute;
+        top: 0;
+        left: 0;
+
+        user-drag: none; 
+        user-select: none;
+        -moz-user-select: none;
+        -webkit-user-drag: none;
+        -webkit-user-select: none;
+        -ms-user-select: none;
+    }
+
+</style>
+
+<html style = 'width: 100%; height: 100%'>
+    <body style = 'width: 100%; height: 100%'>
+        <!-- top should be adjusted based on width-->
+        <video width="100%" height="100%" autoplay muted loop style = 'position: fixed; object-fit:cover' id = 'trailer'>
+            <source src="tenet_trailer.mp4" type="video/mp4">
+         </video>
+         <div style = 'background: #1119; position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 10' id = 'fade'></div>
+
+         <div style = 'position:relative ;width: 100%;  z-index: 100; padding: 30vh 0 0 0px; overflow:hidden' id = 'wrapper'>
+
+            <div style = "margin-left: 100px">
+                <img src = "tenet_logo.svg" style = 'width: 500px; margin-bottom: 20px;'>
+                <div style = 'font-weight: 700; font-size: 35px'>An interactive guide</div>
+                <div style = 'width: 70%; height: 3px; background: #fff; margin-bottom: 25px; margin-top: 25px'></div>
+
+                <div style = 'font-size: 20px; width: 45%; margin-bottom: 100px'>
+                    <p>The goal of this project was to clear up a confusing subject by remixing it in some way. I chose to remix the film TENET, and transform it into a map that goes through the events of the film in a way that is easier for humans to understand.</p>
+
+                    <p>Non-linear time is awfully confusing for most people to grasp on their first time viewing, and I believe that contributed to TENET's relatively poor reception. I think the film itself is revolutionary in the techniques--both in plot and in SFX--that it employs, and should be appreciated as something truly ahead of its time.</p>
+
+                    <p>To use the map, follow any of the lines until they fade out to learn more about a particular character (or characters)’s timeline. Blue indicates inverted characters and red indicates forward moving characters. Time moves from right to left. Hover over a circle to view a particular scene from the movie if you need some visual reference to jog your mind! Drag using the mouse and zoom using ctrl+scrollwheel or pinch zooming.</p>
+
+                    <p>	▀</p>
+
+                </div>
+            </div>
+
+            <div style = 'width: calc(100% + 100px); height: 200%; overflow: scroll; margin-left: 0px; position: relative' id = 'map-container'>
+                <video height = '150' autoplay muted loop style = 'position: absolute; z-index: 1000; border-left-style: solid; border-width: 2px; border-color: white; display: none' id = 'clip'>
+                    <source src = 'clips/kat_cut.mp4' type = 'video/mp4' id = 'source'>
+                </video>
+
+                <div style = "background: white; height: 30px; width: 2px; position: absolute;" id = 'clip-bar'></div>
+
+                <object data="Group 1.svg" type="image/svg+xml"
+                id="map" style = "width: 300%;"></object>
+
+                <div id = 'map-container-actual' style = 'width: 300%; height: 100%; position: absolute; top:0 ; left: 0'></div>
+       
+            </div>
+
+        </div>
+
+    </body>
+</html>
+
+<script>    
+    let state = {
+            clicking: false,
+            clickPos: [],
+            mapPos: [0, 0],
+            currentMapPos: [0, 0],
+            scale: 1,
+            lastMousePos: [],
+            currentlyDisplayed: -1
+        };
+
+    
+    const mapContainerReal = document.getElementById('map-container');
+    const mapContainer = document.getElementById('map-container-actual');
+    const map = document.getElementById('map');
+    const clip = document.getElementById('clip');
+    const clipBar = document.getElementById('clip-bar');
+    const source = document.getElementById('source');
+
+    function worldToSvg(x, y) {
+        const rect = mapContainer.getBoundingClientRect();
+
+        x -= rect.left;
+        y -= rect.top;
+
+        x -= state.currentMapPos[0];
+        y -= state.currentMapPos[1];
+
+        const screenWidth = mapContainerReal.clientWidth;
+        const svgWidth = 2577;
+
+        const svgScale = 3 * state.scale;
+
+        const adjustFactor = svgWidth/(screenWidth * svgScale) ;
+ 
+        return [x * adjustFactor, y * adjustFactor]
+    }
+
+    function svgToWorld(x, y) {
+        const rect = mapContainer.getBoundingClientRect();
+
+        const screenWidth = mapContainerReal.clientWidth;
+        const svgWidth = 2577;
+
+        const svgScale = 3 * state.scale;
+
+        const adjustFactor = svgWidth/(screenWidth * svgScale) ;
+
+        x /= adjustFactor;
+        y /= adjustFactor;
+
+        x += state.currentMapPos[0];
+        y += state.currentMapPos[1];
+
+        return [x, y];
+    }
+
+    const events = [
+        {
+            position : [727, 624.5, 5], 
+            id: 'c3',
+            clip: "./clips/oslo_cut.mp4"
+        },
+        {
+            position : [1009, 624.5, 5], 
+            id: 'c4',
+            clip: "./clips/bungee_cut.mp4"
+        }, 
+        {
+            position: [825, 201, 5],
+            id: 'c1',
+            clip: "./clips/oslo_reverse.mp4"
+        },
+        {
+            position: [863, 130, 5],
+            id: 'c2',
+            clip: "./clips/protag_priya.mp4"
+        }, 
+        {
+            position: [1450.4, 624.5, 5],
+            id: "c5",
+            clip: "./clips/attack_protag.mp4"
+        },
+        {
+            position: [1450.5, 547, 5], 
+            id: 'c6',
+            clip: "./clips/sator_listens.mp4"
+        }, 
+        {
+            position: [1837, 624.5, 5],
+            id: 'c7',
+            clip: "./clips/cavalry.mp4"
+        },
+        {
+            position: [2065.6, 624.5, 5],
+            id: 'c9',
+            clip: "./clips/cavalry_arrives.mp4"
+        },
+        {
+            position: [2065.5, 547, 5],
+            id: 'c10',
+            clip: "./clips/sator_turnstile.mp4"
+        }, 
+        {
+            position: [2066, 280, 5],
+            id: "c11",
+            clip: "./clips/sator_interrogation.mp4"
+        },
+        {
+            position: [1599, 280, 5],
+            id: 'c12',
+            clip: "./clips/sator_discovers.mp4"
+
+        }, 
+        {
+            position: [1837, 280, 5],
+            id: "c13",
+            clip: "./clips/sator_lie.mp4"
+
+        }, 
+        {
+            position: [2296.5, 197, 5],
+            id: "c14",
+            clip: "./clips/kat_inverts.mp4"
+        },
+        {
+            position: [1599, 198, 5],
+            id: "c15",
+            clip: "./clips/sator_discovers.mp4"
+
+        },
+        {
+            position: [1877, 470.5, 5], 
+            id: "c16",
+            clip: "./clips/kidnap.mp4"
+        },
+        {
+            position: [1450.5, 470.5, 5],
+            id: "c17",
+            clip: "./clips/sator_listens.mp4"
+        },
+        {
+            position: [1203.5, 547, 5],
+            id: 'c18',
+            clip: "./clips/kat_cut.mp4"
+        }, 
+        {
+            position: [1203.5, 280, 5],
+            id: 'c19',
+            clip: "./clips/pick_up_kat.mp4"
+        },
+        {
+            position: [1419.5, 280, 5],
+            id: 'c20',
+            clip: "./clips/invert_protag_crashes.mp4"
+        },
+        {
+            position: [1394, 199, 5],
+            id: 'c21',
+            clip: "./clips/protag_wakes_up.mp4"
+        }, 
+        {
+            position: [427, 624.5, 5],
+            id: 'c22',
+            clip: "./clips/opera_cut.mp4"
+        },
+        {
+            position: [782, 58.5, 5],
+            id: 'c23',
+            clip: "./clips/magne_viking.mp4"
+        },
+        {
+            position: [300, 209, 5],
+            id: 'c24',
+            clip: "./clips/neil_tripwire.mp4"
+        },
+        {
+            position: [333.5, 158, 5],
+            id: 'c25',
+            clip: "./clips/neil_truck.mp4"
+        },
+        {
+            position: [323.5, 138.3, 5],
+            id: 'c26',
+            clip: "./clips/neil_inverts_again.mp4"
+        },
+        {
+            position: [203, 209, 5],
+            id: "c27"
+        },
+        {
+            position: [187, 58.5, 5],
+            id: "c28",
+            clip: "./clips/protag_inverts.mp4"
+        },
+        {
+            position: [124, 6, 5],
+            id: 'c29'
+        },
+        {
+            position: [283, 32, 5],
+            id: 'c30',
+            clip: "./clips/splinter.mp4"
+        }
+    ]
+
+    const trailer = document.getElementById('trailer');
+
+    window.addEventListener('scroll', function (event) {
+        const fade = document.getElementById('fade');
+        if (window.pageYOffset > 150) {
+            trailer.style.display = 'none';
+        } else {
+            trailer.style.display = 'initial';
+        }
+
+        if (window.pageYOffset > 00) { 
+            let offset = window.pageYOffset - 0; 
+            fade.style.background = `rgba(16, 16, 16, ${Math.min(255, 144 + offset / 1.2) / 256})`;
+        }
+    });
+
+    let elements = {};
+
+    mapContainer.addEventListener('wheel', function (e) {
+        //console.log(e);
+
+        if (e.ctrlKey) {
+            // Your zoom/scale factor
+            if ((state.scale > 0.25 && state.scale < 3) || (state.scale < 0.25 && e.deltaY < 0) || (state.scale > 3 && e.deltaY > 0)) {
+                state.scale -= e.deltaY * 0.01;
+            
+                map.style.width = '300' * state.scale + "%";
+
+                let diffX = state.currentMapPos[0] - state.lastMousePos[0];
+                let diffY = state.currentMapPos[1] - state.lastMousePos[1];
+
+                diffX *= (state.scale)/(state.scale + e.deltaY * 0.01);
+                diffY *= state.scale/(state.scale + e.deltaY * 0.01);
+
+                map.style.top = (state.lastMousePos[1] + diffY) + 'px';
+                map.style.left = (state.lastMousePos[0] + diffX) + 'px';
+
+                state.currentMapPos = [state.lastMousePos[0] + diffX, state.lastMousePos[1] + diffY]
+                state.mapPos = [state.lastMousePos[0] + diffX, state.lastMousePos[1] + diffY]
+            }
+
+            e.preventDefault();
+
+        } else {
+            // Your trackpad X and Y positions
+            
+        }
+
+    }, {passive:false});
+
+
+    mapContainer.addEventListener('mousedown', function (event) {
+        state.clicking = true;
+        state.clickPos = [event.clientX, event.clientY];
+    })
+    mapContainer.addEventListener('mouseup', function (event) {
+        state.clicking = false;
+        state.clickPos = [];
+
+        console.log('mouseup');
+
+        state.mapPos = [state.currentMapPos[0], state.currentMapPos[1]];
+    })
+
+    mapContainer.addEventListener('mouseout', function (event) {
+        state.clicking = false;
+        state.clickPos = []; 
+
+        state.mapPos = [state.currentMapPos[0], state.currentMapPos[1]];
+    })
+    mapContainer.addEventListener('mousemove', function (event) {
+        state.lastMousePos = [event.clientX, event.clientY];
+
+        if (state.clicking) {
+
+            let diff = [event.clientX - state.clickPos[0], event.clientY - state.clickPos[1]];
+            map.style.top = (state.mapPos[1] + diff[1]) + 'px';
+            map.style.left = (state.mapPos[0] + diff[0]) + 'px';
+
+            state.currentMapPos = [(state.mapPos[0] + diff[0]), state.mapPos[1] + diff[1]]; 
+
+            if (state.currentlyDisplayed !== -1) {
+                let worldCoordinates = svgToWorld(state.currentlyDisplayed.position[0], state.currentlyDisplayed.position[1]);
+
+                clip.style.top = worldCoordinates[1] - 180;
+                clip.style.left = worldCoordinates[0];
+
+                clipBar.style.top = worldCoordinates[1] - 30;
+                clipBar.style.left = worldCoordinates[0];
+            }
+        }
+
+        let coordinates = worldToSvg(event.clientX, event.clientY);
+        
+        events.forEach((e, idx) => {
+            const dist = Math.pow(coordinates[0] - e.position[0], 2) + Math.pow(coordinates[1] - e.position[1], 2);
+
+            if (dist < e.position[2] * e.position[2]) {
+                if (!e.hover) {
+
+                    elements[e.id].setAttribute('originalFill', elements[e.id].getAttribute('fill'));
+
+                    elements[e.id].setAttribute('fill', 'white');
+                    e.hover = true;
+
+                    let worldCoordinates = svgToWorld(e.position[0], e.position[1]);
+
+                    clip.style.top = worldCoordinates[1] - 180;
+                    clip.style.left = worldCoordinates[0];
+
+                    clipBar.style.top = worldCoordinates[1] - 30;
+                    clipBar.style.left = worldCoordinates[0];
+
+                    clip.style.display = 'initial';
+                    clipBar.style.display = 'initial';
+
+                    clip.src = e.clip;
+                    clip.load();
+                
+                    state.currentlyDisplayed = e;
+
+                    console.log(e.clip);
+                }
+            } else {
+                if (e.hover) {
+                    console.log(e.id)
+
+                    elements[e.id].setAttribute('fill', elements[e.id].getAttribute('originalFill'));
+
+                    e.hover = false;
+                    clip.style.display = 'none';
+                    clipBar.style.display = 'none';
+                }
+            }
+        })
+    })
+
+
+    map.addEventListener('load', function() {
+        const contents = map.contentDocument;
+
+        const svg = contents.children[0];
+        
+
+        for (let i = 1; i < 31; i++){
+            let id = "c" + i;
+
+            const element = contents.getElementById(id);
+            elements[id] = element;
+
+            console.log("element" + i);
+            
+        }
+    });
+</script> 

@@ -1,0 +1,696 @@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<link rel = 'stylesheet' href = 'https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.1/css/materialize.min.css'>
+<script src = 'https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.1/js/materialize.min.js'></script>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=DM+Serif+Text&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@200;300;400;500&display=swap" rel="stylesheet">
+
+<script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
+
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Text&display=swap" rel="stylesheet">
+
+<style>
+   
+</style>
+
+<head><meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=3.0, user-scalable=yes" />
+    <meta charset="utf-8">
+
+    <title>Nathan Yan</title>
+    <meta name="description" content="Nathan Yan's got a personal website!">
+    <meta name="author" content="Nathan Yan">
+    <meta name = "keywords" content= "Nathan Yan, Nathan, Yan, Christopher, Nathan Christopher Yan">
+
+  
+    <link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="./favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="./favicon-16x16.png">
+    <link rel="manifest" href="./site.webmanifest">
+
+    <link rel = 'stylesheet' type = 'text/css' href = './style.css?v=2'>
+</head>
+
+<html style = 'width: 100%; height: 100%; background: white'>
+    <body style = 'width: 100%; height: 100%; overflow-x: hidden'>
+        <div style='position: absolute; top: 25px; left: 0px; text-align: center; width: 100%; mix-blend-mode: difference; color: #fff; z-index: 1001'>
+            
+        </div>
+
+        <div style = 'height: fit-content; min-height: 100%; display:flex; align-items: center; padding: 50px; background: white' id = 'intro'>
+           
+            <div class = 'text-block-wide' >
+                <div id = 'name' style = 'align-items: center; position: relative'>
+                    <img style = "width: 170px; height: 170px;border-width: 0px; border-style: solid; margin-right: 10px; margin-bottom: 30px; margin-top: 50px" src= 'assets/profile.jpg'/>
+
+                    <img style = 'width:150px; position: absolute; left: -100px; top: 60px' src='assets/arrow.svg' id='arrow-left'>
+                    <img style = 'width:150px; position: absolute; left: 105px; top: 60px' src='assets/arrow-alt.svg' id='arrow-right'>
+                     
+                    <!--
+                    <div>
+                        <h3>Hello!</h3>
+                        <p style = 'margin-top: -15px; color: #2222ff; font-weight: 400'><a ref = "assets/resume.pdf" href = 'assets/resume_yan_oct28.pdf' class = 'olink'>résumé</a> · <a ref = "mailto:nathancy@cs.uw.edu" href = 'mailto:nathancy@cs.uw.edu' class = 'olink'>nathancy@cs.uw.edu</a></p>
+                    </div> -->
+                    
+                </div>
+                <div style='font-family: "DM Mono"; margin-bottom: 30px' id='links'>
+                    <a class='olink' ref='/assets/resume.pdf' href='/assets/resume_yan_oct28.pdf'>résumé</a> · <a class='olink' ref='mailto:nathancy@cs.uw.edu' href='mailto:nathancy@cs.uw.edu'>nathancy@cs.uw.edu</a>
+                </div>
+                <p️>
+                I am a sophomore at the <a href = 'https://washington.edu'><span class = 'olink link' ref = 'washington.edu' style = 'color: #4b2e83;'>University of Washington</span></a>, studying computer science.
+                </p>
+                <p>
+                While I love all things CS, I have a particular hobby-like interest in Artificial Intelligence, especially in NLP and RL.
+                    <br/>
+                </p>
+                
+                <div style='position: relative; border-bottom: 2px solid black; height: 80px; margin-top: 0; margin-bottom: 40px' id='cartpole-parent'>
+                    <div id = 'cart'></div>
+                    <div id = 'pole'></div>
+                    <div id = 'target'></div>
+                    <div style='position: absolute; left: -70px; bottom: 0px; width: 150px; background-image:linear-gradient(to right, #ffff , #ffff,  #fff0); height: 80px; z-index: 100'></div>
+                    <div style='position: absolute; right: -70px; bottom: 0px; width: 150px; background-image:linear-gradient(to left, #ffff , #ffff,  #fff0); height: 80px; z-index: 100'></div>
+
+                    <div style='position: absolute; bottom: -25px; font-family: "DM Mono"; font-size: 10px; color: #aaa'>Move your mouse to direct Steve the <a class='olink olink-text olink-lower olink-left' ref='Steve is a small neural network trained with policy gradients on a modified cartpole task to navigate toward a target (the black dot)!'>cartpole</a>!</div>
+                </div>
+
+                <p>
+                    Currently, I am a SWE intern at <a class='olink' ref='arine.io' href='https://arine.io'>Arine</a>, where I help develop medical recommendation rules to optimize patient care. I will be interning at <a class='olink' ref='twosigma.com' href='https://twosigma.com'>Two Sigma</a> in the summer, and at <a class='olink' ref='panopto.com' href='https://panopto.com'>Panopto</a> in the fall!
+                </p>
+
+                <p>
+                    Take a look at some of the things I've worked on over the years! ⬇️
+                </p>
+            </div>
+
+        </div>
+
+        <div style='text-align: center'>
+            <img style='width: 400px' src='./assets/squiggle.svg'>
+        </div>
+
+        <div style='padding-bottom: 80px; margin-top: 100px;'>
+            <div class='text-block'>
+                <h3>Blog.</h3>
+                <a class='olink' ref='/blog' href='/blog'>Musings, tutorials, explanations... perhaps the occasional recipe.</a>
+            </div>
+        </div>
+
+        <div style = 'padding-bottom: 100px; margin-top: 100px;'>
+            <div class = 'text-block'>
+                <h3>Projects.</h3>
+                <p>These are some things I've worked on, either because a neat idea caught my attention or I had a problem I wanted to solve.</p>
+            </div>
+            <div id = 'projects' style = 'position: relative; height: fit-content; display: flex; flex-wrap: wrap; padding: 50px; justify-content: center;'>
+                
+                <div class = 'project' style = 'top: 10px; left: 20px; margin-right: 150px'>
+                    <a href = 'https://github.com/nathan-yan/mnist-neural-automata'><img class = 'olink image' ref = 'nathan-yan/mnist-neural-automata' src = 'https://github.com/nathan-yan/mnist-neural-automata/raw/master/mnist.gif'></a>
+                    <div class = 'text'>Growing MNIST digits with neural cellular automata</div>
+                </div>
+
+                <div class = 'project' style = 'top: 30px; left: 10px; margin-right: 150px'>
+                    <a href = 'https://github.com/nathan-yan/fractals'><img class = 'olink image' ref = 'nathan-yan/fractals' src = 'https://nathan-yan.github.io/fractals/fractals/fractal16_.png'></a>
+                    <div class = 'text text-center'>Generating fractals with complex "neural networks" <a href = 'https://nathan-yan.github.io/fractals' class = 'olink' ref = 'nathan-yan.github.io/fractals'>Blog post</a></div>
+                </div>
+
+                <div class = 'project' style = 'top: -15px; left: 15px;'>
+                    <a href = 'https://github.com/team-llambda/gradebook-backend'><img class = 'olink image' ref = 'team-llambda/gradebook-backend' src = './assets/gradebook.png'></a>
+                    <div class = 'text text-left'><span  style = 'font-weight: 500'>GradeBook</span>, an intuitive grade viewer</div>
+                </div>
+
+                <div class = 'project' style = 'top: -15px; left: 15px; margin-right: 150px'>
+                    <a href = 'https://github.com/nathan-yan/otp_'><img class = 'olink image' ref = 'nathan-yan/otp_' src = './assets/demo_otp.gif'></a>
+                    <div class = 'text'><span style = 'font-weight: 500'>otp_</span>, a commandline one-time password interface
+                    </div>
+                </div>
+
+                <div class = 'project' style = 'top: -15px; left: 15px; margin-right: 150px'>
+                    <a href = 'https://github.com/nathan-yan/poly'><img class = 'olink image' ref = 'nathan-yan/poly' src = './assets/poly.gif'></a>
+                    <div class = 'text text-center'><span style = 'font-weight: 500'>poly</span>, an 8bit multiplayer platformer (WIP!)
+                    </div>
+                </div>
+
+                <div class = 'project' style = 'top: -15px; left: 15px;'>
+                    <a href = 'https://github.com/nathan-yan/wells'><img class = 'olink image' ref = 'nathan-yan/wells' src = './assets/wells.gif'></a>
+                    <div class = 'text text-left'><span style = 'font-weight: 500'>Wells</span>, an illustration of various gradient descent methods</div>
+                </div>
+
+            </div>
+
+            <div class = 'text-block' style = 'margin-top: 100px'>
+                <h3>Models.</h3>
+                <p>These are implementations of papers I found especially cool.</p>
+            </div>
+            <div id = 'models' style = 'position: relative; height: fit-content; display: flex; flex-wrap: wrap; padding: 50px; justify-content: center;'>
+                <div class = 'model' style = 'top: 10px; left: 20px; margin-right: 150px'>
+                    <a href = 'https://github.com/nathan-yan/neural-turingmachine'><img class = 'olink image' ref = 'nathan-yan/neural-turingmachine' src = './assets/ntm.PNG'></a>
+                    <div class = 'text'>Neural Turing Machines [Graves et al.,2014]</div>
+                </div>
+
+                <div class = 'model' style = 'top: 10px; left: 20px; margin-right: 150px'>
+                    <a href = 'https://github.com/nathan-yan/recurrent-attention-models'><img class = 'olink image' ref = 'nathan-yan/recurrent-attention-models' src = './assets/visual-attention.PNG'></a>
+                    <div class = 'text text-center'>Recurrent Models of Visual Attention [Mnih et al.,2014]</div>
+                </div>
+
+                <div class = 'model' style = 'top: 10px; left: 20px; margin-right: 0px'>
+                    <a href = 'https://github.com/nathan-yan/draw'><img class = 'olink image' ref = 'nathan-yan/draw' src = './assets/draw.gif'></a>
+                    <div class = 'text text-left'>Deep Recurrent Attentive Writer [Gregor et al.,2015]</div>
+                </div>
+
+                <div class = 'model' style = 'top: 10px; left: 20px; margin-right: 150px;'>
+                    <a href = 'https://github.com/nathan-yan/DQN'><img class = 'olink image' ref = 'nathan-yan/DQN' src = 'https://miro.medium.com/max/640/1*jXpSVhjWRxgzDDKKVAQR8A.gif
+                    '></a>
+                    <div class = 'text'>Deep Q Networks [Mnih et al.,2013]</div>
+                </div>
+
+                <div class = 'model' style = 'top: 10px; left: 20px; margin-right: 0px'>
+                    <a href = 'https://github.com/nathan-yan/sketch-rnn'><img class = 'olink image' ref = 'nathan-yan/sketch-rnn' src = 'https://magenta.tensorflow.org/assets/sketch_rnn_demo/img/sketch_garden.gif
+                    '></a>
+                    <div class = 'text text-left'>Sketch-RNN [Ha & Eck,2017]</div>
+                </div>
+
+
+            </div>
+
+            <div class = 'text-block' style = 'margin-top: 100px'>
+                <h3>Film Photography.</h3>
+                <p>I think film is such an interesting medium! Hoping to someday incorporate Polaroid and medium format.</p>
+                <p>Click on a photo to scroll to it, or just scroll left to right if you're on touchpad/mobile.</p>
+            </div>
+
+            <div class = 'text-block' style = ' margin-top: 100px; font-size: 12px'><b>Preface</b><br/><br/>These photos are not supposed to be "good" in any traditional sense, or even in any non-traditional sense. They're mostly an experiment for myself to explore older methods of photography, as well as be more hands on (literally!) and cautious about the photos I take.</div>
+
+            <div class = 'text-block' style = ' margin-top: 80px; font-size: 12px'>
+                <b>Roll 3: ???-???, Tri-X 400</b>
+                <br/><br/>
+                This was actually one of the first rolls I ever took, but for some reason never developed until recently.
+                <br/><br/>
+                I think I was mostly messing around with this roll, since I was just testing out the camera at the time, but I still managed to get a few decent photos out of it.
+            </div>
+        
+            <div class = 'pictures'>
+                <div class = 'picture' style = ''>
+                    <img class = 'film-image' ref = 'roll2' src = './assets/film/roll3_p1.jpg'></img>
+                    <div style = 'font-size: 10px; margin-top: 5px'>Unknown, Canon A-1 @ 50mm</div>
+                   
+                </div>
+        
+                <div class = 'picture' style = ''>
+                    <img class = 'film-image' ref = 'roll2' src = './assets/film/roll3_p2.jpg'></img>
+                    <div style = 'font-size: 10px; margin-top: 5px'>Seattle Suburb (+ birbs!), Canon A-1 @ 50mm</div>
+                   
+                </div>
+
+                <div class = 'picture' style = ''>
+                    <img class = 'film-image' ref = 'roll2' src = './assets/film/roll3_p3.jpg'></img>
+                    <div style = 'font-size: 10px; margin-top: 5px'>My car, Canon A-1 @ 50mm</div>
+                   
+                </div>
+               
+            </div>
+
+            <div class = 'text-block' style = ' margin-top: 80px; font-size: 12px'>
+                <b>Roll 2: Feb 2021 - Mar 2021, Portra 400</b>
+                <br/><br/>
+                This roll was actually taken before Roll 1, but was developed later. I've decided just now to order the rolls by their development date. 
+                <br/><br/>
+                This was a fun roll because we had a few snow days this year and I was able to capture some of those moments with the film camera. In addition, this roll features a lot of varied photos from around the Seattle/Bellevue area.
+                <br/><br/>
+                These photos don't have the best scan quality. I'll probably come back in a few days and rescan them.
+            </div>
+    
+            <div class = 'pictures'>
+                <div class = 'picture' style = ''>
+                    <img class = 'film-image' ref = 'roll2' src = './assets/film/roll2_p1.jpg'></img>
+                    <div style = 'font-size: 10px; margin-top: 5px'>Seattle Center, Canon A-1 @ 50mm</div>
+                   
+                </div>
+    
+                <div class = 'picture' style = ''>
+                    <img class = 'film-image' src = './assets/film/roll2_p2.jpg'></img>
+                    <div style = 'font-size: 10px; margin-top: 5px'>Space Needle, Canon A-1 @ 50mm</div>
+                   
+                </div>
+    
+                <div class = 'picture' style = ''>
+                    <img class = 'film-image' src = './assets/film/roll2_p3.jpg'></img>
+                    <div style = 'font-size: 10px; margin-top: 5px'>Space Needle, Canon A-1 @ 50mm</div>
+                   
+                </div>
+    
+                <div class = 'picture' style = ''>
+                    <img class = 'film-image' src = './assets/film/roll2_p5.jpg'></img>
+                    <div style = 'font-size: 10px; margin-top: 5px'>Pacific Science Center, Canon A-1 @ 50mm</div>
+                   
+                </div>
+    
+                <div class = 'picture' style = ''>
+                    <img class = 'film-image' src = './assets/film/roll2_p6.jpg'></img>
+                    <div style = 'font-size: 10px; margin-top: 5px'>Alweg Monorail, Canon A-1 @ 50mm</div>
+                   
+                </div>
+    
+                <div class = 'picture' style = ''>
+                    <img class = 'film-image' src = './assets/film/roll2_p7.jpg'></img>
+                    <div style = 'font-size: 10px; margin-top: 5px'>Meadow Wood Park (self-timer, I'm a bit blurry), Canon A-1 @ 50mm</div>
+                   
+                </div>
+    
+                <div class = 'picture' style = ''>
+                    <img class = 'film-image' src = './assets/film/roll2_p8.jpg'></img>
+                    <div style = 'font-size: 10px; margin-top: 5px'>Meadow Wood Park, Canon A-1 @ 50mm</div>
+                   
+                </div>
+            </div>
+
+            <div class = 'text-block' style = ' margin-top: 100px; font-size: 12px'>
+                <b>Roll 1: Mar - Jul 2021, Portra 400</b>
+                <br/><br/>
+                I was really excited to use color film, and it was a ton of fun seeing the photos after they were developed.
+                <br/><br/>
+                I also didn't self-develop this roll, because I was worried about messing up the chemistry since color film is generally trickier to get right.
+                <br/><br/>
+                In fact, I was so worried about ruining the film that I scanned them with the protective cover still on (shoutout to Omega Photo in Bellevue!), and you can see the lip of the cover on the photos! I thought it gave them a more personal, sentimental look to it so I decided not to edit them out.
+            </div>
+
+            <div class = 'pictures'>
+                <div class = 'picture' style = ''>
+                    <img class = 'film-image' ref = 'roll1' src = './assets/film/roll1_p1.jpg'></img>
+                    <div style = 'font-size: 10px; margin-top: 5px'>UW, Canon A-1 @ 50mm</div>
+                   
+                </div>
+
+                <div class = 'picture' style = ''>
+                    <img class = 'film-image' src = './assets/film/roll1_p2.jpg'></img>
+                    <div style = 'font-size: 10px; margin-top: 5px'>UW Red Square + Faint Mt. Rainier, Canon A-1 @ 50mm</div>
+                   
+                </div>
+
+                <div class = 'picture' style = ''>
+                    <img class = 'film-image' src = './assets/film/roll1_p3.jpg'></img>
+                    <div style = 'font-size: 10px; margin-top: 5px'>UW, Canon A-1 @ 50mm</div>
+                   
+                </div>
+
+                <div class = 'picture' style = ''>
+                    <img class = 'film-image' src = './assets/film/roll1_p4.jpg'></img>
+                    <div style = 'font-size: 10px; margin-top: 5px'>UW Quad, Canon A-1 @ 50mm</div>
+                   
+                </div>
+
+                <div class = 'picture' style = ''>
+                    <img class = 'film-image' src = './assets/film/roll1_p5.jpg'></img>
+                    <div style = 'font-size: 10px; margin-top: 5px'>UW Quad, Canon A-1 @ 50mm</div>
+                   
+                </div>
+
+                <div class = 'picture' style = ''>
+                    <img class = 'film-image' src = './assets/film/roll1_p6.jpg'></img>
+                    <div style = 'font-size: 10px; margin-top: 5px'>Pike Place, Canon A-1 @ 50mm</div>
+                   
+                </div>
+
+                <div class = 'picture' style = ''>
+                    <img class = 'film-image' src = './assets/film/roll1_p7.jpg'></img>
+                    <div style = 'font-size: 10px; margin-top: 5px'>Mount Si, Canon A-1 @ 50mm</div>
+                   
+                </div>
+
+                <div class = 'picture' style = ''>
+                    <img class = 'film-image' src = './assets/film/roll1_p8.jpg'></img>
+                    <div style = 'font-size: 10px; margin-top: 5px'>Rattlesnake Ridge, Canon A-1 @ 50mm</div>
+                   
+                </div>
+
+                <div class = 'picture' style = ''>
+                    <img class = 'film-image' src = './assets/film/roll1_p9.jpg'></img>
+                    <div style = 'font-size: 10px; margin-top: 5px'>Rattlesnake Ridge, Canon A-1 @ 50mm</div>
+                   
+                </div>
+            </div>
+        </div>
+
+       
+
+            <div class = 'text-block' style = 'margin-top: 100px; font-size: 12px'>
+                <b>Roll 0: Oct 2020 - Feb 2021, Ilford HP5 PLUS</b>
+                <br/><br/>
+                Since this roll was taken during the school year, a lot of my photos were taken at UW, and this will likely be a recurring theme in the future.
+                <br/><br/>
+                This roll was self-developed, and some photos gained post-processing artifacts because of the way I handled them. Obviously not perfect but I thought it looked cool :)
+                <br/><br/>
+                Also at this point I hadn't figured out the specifics of the scanning system (using my laptop screen as backlight while I took pictures with a macro lens) so you can sometimes see the pixels of my laptop.
+            </div>
+
+            <div class = 'pictures'>
+                <div class = 'picture' style = ''>
+                    <img class = 'film-image' ref = 'roll1' src = './assets/film/roll0_p1.jpg'></img>
+                    <div style = 'font-size: 10px; margin-top: 5px'>UW Red Square, Canon A-1 @ 50mm</div>
+                   
+                </div>
+                <div class = 'picture' style = ''>
+                    <img class = 'film-image' ref = 'roll1' src = './assets/film/roll0_p2.jpg'></img>
+                    <div style = 'font-size: 10px; margin-top: 5px'>Seattle Boat Launch, Canon A-1 @ 50mm</div>
+                   
+                </div>
+                <div class = 'picture' style = ''>
+                    <img class = 'film-image' ref = 'roll1' src = './assets/film/roll0_p5.jpg'></img>
+                    <div style = 'font-size: 10px; margin-top: 5px'>UW Willow Hall, Canon A-1 @ 50mm</div>
+                   
+                </div>
+                <div class = 'picture' style = ''>
+                    <img class = 'film-image' ref = 'roll1' src = './assets/film/roll0_p4.jpg'></img>
+                    <div style = 'font-size: 10px; margin-top: 5px'>UW Willow Hall, Canon A-1 @ 50mm</div>
+                   
+                </div>
+                <div class = 'picture' style = ''>
+                    <img class = 'film-image' ref = 'roll1' src = './assets/film/roll0_p3.jpg'></img>
+                    <div style = 'font-size: 10px; margin-top: 5px'>UW, Canon A-1 @ 50mm</div>
+                   
+                </div>
+            </div>
+
+           
+    </div>
+
+  
+
+        <div style = 'margin-top: 100px; text-align: center; padding-bottom: 50px; width: 75%; margin-left: 12.5%'>
+        Nathan Yan :: <a ref = "assets/resume.pdf" href = 'assets/resume_yan_oct28.pdf' class = 'olink'>résumé</a> · <a ref = "mailto:nathancy@uw.edu" href = 'mailto:nathancy@uw.edu' class = 'olink'>nathancy@cs.uw.edu</a> · <a ref = "github.com/nathan-yan" href = 'https://github.com/nathan-yan' class = 'olink'>github</a></div>
+
+        <div id = 'link-block'></div>
+
+
+    </body>
+</html>
+
+<script>
+    let handleEntities = (entities, n) => {
+        entities.map((idx, ent) => {
+        ent = $(ent);
+        if (idx % n == 0){
+            if (n == 1){ 
+                ent.find('.text')[0].className = 'text text-center';
+                ent.css('margin-right', '0px');
+            }else{
+                ent.find('.text')[0].className = 'text text-right';
+                ent.css('margin-right', '150px');
+            }
+        }else if (idx % n == 1){
+            if (n == 2){
+                ent.find('.text')[0].className = 'text text-left';
+                ent.css('margin-right', '0px');
+            }else{
+                ent.find('.text')[0].className = 'text text-center';
+                ent.css('margin-right', '150px');    
+            }
+        }else if (idx % 3 == 2){
+            ent.find('.text')[0].className = 'text text-left';
+            ent.css('margin-right', '0px');
+        }
+    })
+
+        if (n == 2 && entities.length % 2) {
+            $(entities[entities.length - 1]).find('.text')[0].className = 'text text-center';
+            $(entities[entities.length - 1]).css('margin-right', '0px');
+        }
+
+        else if (n == 3 && entities.length % 3 == 1) {
+            $(entities[entities.length - 1]).find('.text')[0].className = 'text text-center';
+            $(entities[entities.length - 1]).css('margin-right', '0px');
+        }else if (n == 3 && entities.length % 3 == 2) {
+            $(entities[entities.length - 1]).find('.text')[0].className = 'text text-left';
+                
+            $(entities[entities.length - 1]).css('margin-right', '0px');
+        }
+
+    }
+
+    let checkSize = (e) => {
+        let width = $(window).width();
+
+        if (width > 1310) {
+            $('#projects').css('padding-left', (50 + (width - 1310) / 2) + 'px');
+            $('#projects').css('padding-right', (50 + (width - 1310) / 2) + 'px');
+
+            $('#models').css('padding-left', (50 + (width - 1310) / 2) + 'px');
+            $('#models').css('padding-right', (50 + (width - 1310) / 2) + 'px');
+
+            let entities = $('.project');
+            handleEntities(entities, 3);
+
+            entities = $('.model');
+            handleEntities(entities, 3);
+
+            
+        }else if (width > 802) {
+            $('#projects').css('padding-left', (50 + (width - 910) / 2) + 'px');
+            $('#projects').css('padding-right', (50 + (width - 910) / 2) + 'px');
+
+            $('#models').css('padding-left', (50 + (width - 910) / 2) + 'px');
+            $('#models').css('padding-right', (50 + (width - 910) / 2) + 'px');
+            
+            let entities = $('.project');
+            handleEntities(entities, 2);
+
+            entities = $('.model');
+            handleEntities(entities, 2);
+           
+
+        }else {
+            let entities = $('.project');
+             handleEntities(entities, 1);
+
+             entities = $('.model');
+             handleEntities(entities, 1);
+
+        }
+    }
+
+    $(document).ready(checkSize);
+
+    $(window).resize(checkSize)
+</script>
+
+<script src = "./weights.js"></script>
+
+<script>
+    /*this code is heavily borrowed from the cartpole environment of OpenAI's gym*/
+    $(document).mousemove((e) => {
+     
+        let width = $(window).width();
+        let cartpoleParentWidth = $('#cartpole-parent').width();
+        let pos = e.clientX;
+
+        let scaledPos = (e.clientX - width / 2) / (cartpoleParentWidth / 2) * 3;
+
+        if (scaledPos > 2.5) scaledPos = 2.5;
+        if (scaledPos < -2.5) scaledPos = -2.5;
+
+        targetTarget = scaledPos; 
+    
+        let target = $(e.target);
+        if (target.hasClass("olink")) {
+            let linkBlock = $('#link-block');
+
+            let offsetY = -45;
+
+            if (target.hasClass("olink-lower")) {
+                offsetY = +20;
+            }
+
+            let offsetX = 8;
+
+            linkBlock.css('top', (e.clientY + offsetY) + 'px');
+
+            if (target.hasClass('olink-left')) {
+                linkBlock.css('left', '');
+                linkBlock.css('right', (width - (e.clientX)) + 'px');
+            } else {
+                linkBlock.css('right', '');
+                linkBlock.css('left', (e.clientX + 8) + 'px');
+            }
+
+            if (target.hasClass('olink-text')) {
+                linkBlock.addClass('olink-text-attr'); 
+            } else {
+                linkBlock.removeClass('olink-text-attr');
+            }
+
+            linkBlock.text(target.attr('ref'))
+        }else{
+            let linkBlock = $('#link-block');
+            linkBlock.text('');
+            linkBlock.css('top', '-100px');
+        }
+    });
+
+    $('.film-image').mouseup((e) => {
+        console.log("test!");
+        let target = $(e.target);
+        let parent = $(target.parent()).parent();
+        parent.animate({
+            scrollLeft: target.offset().left + parent.scrollLeft() - ($(window).width() - target.width())/2
+        }, 500);
+    })
+
+    let state = [
+        (Math.random() - 0.5) * 2 * 2.,
+        (Math.random() - 0.5) / 10. * 1,
+        (Math.random() - 0.5) / 10. * 1,
+        (Math.random() - 0.5) / 10. * 1,
+        (Math.random() - 0.5) * 2 * 2.
+    ];
+
+    let targetTarget = 0;
+    let gravity = 12.8;
+    let masspole = 0.1;
+    let masscart = 1.0;
+    let length = 0.5;
+    let total_mass = (masspole + masscart);
+    let polemass_length = masspole * length;
+    let force_mag = 10.0;
+    let tau = 0.02;
+    let x_threshold = 4;
+    let theta_threshold_radians = 30 * 2 * Math.PI / 360.;
+
+    let tanh = (x) => {
+        return (Math.exp(2 * x) - 1) / ( Math.exp(2  *x) + 1);
+    }
+
+    let temperature = 10;
+
+    let model = (obs) => {
+        // obs -> 5 vector
+
+        //janky for loop matrix multiplication
+        let hiddenActivations = []
+        for (let n = 0; n < 30; n++){
+           let neuronAcc = 0;
+            for (let i = 0; i < 5; i++){
+                neuronAcc += ih_weight[n][i] * obs[i];
+           } 
+
+           neuronAcc += ih_bias[n];
+
+           // tanh
+           hiddenActivations.push(tanh(neuronAcc));
+        }
+
+        let outputActivations = [];
+        for (let n = 0; n < 2; n++){
+            let neuronAcc = 0;
+            for (let i = 0; i < 30; i++){
+                neuronAcc += ha_weight[n][i] * hiddenActivations[i];
+            }
+
+            neuronAcc += ha_bias[n];
+
+            // sigmoid 
+            outputActivations.push(Math.exp(neuronAcc * temperature));
+        }
+
+        // normalize output activations
+        let sum = outputActivations.reduce((a, b) => {return a + b;}, 0)
+        for (let i = 0; i < outputActivations.length; i++){
+            outputActivations[i] /= sum;
+        }
+
+        return outputActivations;
+
+    }
+
+    let step = (state, action) => {
+        x = state[0];
+        x_dot = state[1];
+        theta = state[2];
+        theta_dot = state[3];
+        target = state[4];
+
+        if (action === 1){
+            force = force_mag 
+        }
+        else{
+            force = -force_mag
+        }
+        //force = 0;
+
+        costheta = Math.cos(theta)
+        sintheta = Math.sin(theta)
+
+        temp = (force + polemass_length * theta_dot ** 2 * sintheta) / total_mass
+        thetaacc = (gravity * sintheta - costheta * temp) / (length * (4.0 / 3.0 - masspole * costheta ** 2 / total_mass))
+        xacc = temp - polemass_length * thetaacc * costheta / total_mass
+
+        x = x + tau * x_dot
+        x_dot = x_dot + tau * xacc
+        theta = theta + tau * theta_dot
+        theta_dot = theta_dot + tau * thetaacc
+
+        state = [x, x_dot, theta, theta_dot, target]
+
+        done = x < -x_threshold || x > x_threshold || theta < -theta_threshold_radians || theta > theta_threshold_radians;
+        
+        return [state, done]
+    }
+
+    let pole = document.getElementById('pole');
+    let targetElement = document.getElementById('target');
+    //console.log('yeet');
+
+    let getRandomInt = (min, max) => {
+        min = Math.ceil(min);
+        max = Math.floor(max);
+        return Math.floor(Math.random() * (max - min)) + min;
+    }
+
+    setInterval( () => {
+        let actionProbs = model(state);
+
+        let action;
+        if (Math.random() < actionProbs[0]){
+            action = 0;
+        }else{
+            action = 1;
+        }
+
+        env = step(state, action);
+        state = env[0];
+        done = env[1];
+
+        // move target closer to targetTarget
+        state[4] = (0.94) * state[4] + 0.06 * targetTarget;
+
+        //console.log( "rotate(" + state[0] + "rad)");
+        let width = $('#cartpole-parent').width();
+        let scale = $('#cartpole-parent').width() / 6;
+
+        let translate = `translateX(${(state[0]) * scale + width / 2}px)`;
+        let translateTarget = `translateX(${state[4] * scale + width / 2}px)`;
+
+        pole.style.transform = translate + " rotate(" + Math.round(state[2] * 180/Math.PI * 1.1) + "deg)";
+        cart.style.transform = translate;
+
+        targetElement.style.transform = translateTarget;
+
+        if (Math.abs(state[0] - state[4]) < 0.2){
+            cart.style.background = "darkgreen";
+        }else if (Math.abs(state[0] - state[4]) < 0.5){
+            cart.style.background = "gold";
+        }else {
+            cart.style.background= 'red';
+        }
+
+        //console.log(state[0] * 180 / Math.PI);
+
+        if (done) {
+            state = [
+                (Math.random() - 0.5) * 2 * 2.,
+                (Math.random() - 0.5) / 10.,
+                (Math.random() - 0.5) / 10.,
+                (Math.random() - 0.5) / 10.,
+                (Math.random() - 0.5) * 2 * 2.
+            ];
+        }
+    }, 1000 / 50.);
+        
+    
+</script>

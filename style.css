@@ -1,0 +1,284 @@
+h3 {
+    font-family: "Crimson Pro";
+    font-weight: 400;
+}
+
+.serif {
+    font-family: 'DM Mono'; 
+    font-weight: 400;
+
+    width: 250px;
+}
+
+body {
+    font-family: "DM Mono";
+    font-size: 17px;
+    font-weight: 200;
+
+    overflow-y: scroll;
+    scrollbar-width: 0; /* Firefox */
+    -ms-overflow-style: none;  /* Internet Explorer 10+ */
+}
+body::-webkit-scrollbar { /* WebKit */
+    width: 2;
+    height: 0;
+}
+
+.pictures::-webkit-scrollbar {
+    display: none;
+  }
+  
+  /* Hide scrollbar for IE, Edge and Firefox */
+.pictures {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+  }
+
+
+.text-block {
+    width: 400px;
+    margin-left: calc(50% - 200px); 
+}
+
+.text-block-wide {
+    width: 850px;
+    margin-left: calc(50% - 425px);
+
+    font-size: 40px;
+    font-family: "Crimson Pro";
+}
+
+.olink-text-attr {
+    width: 200px !important;
+    font-size: 12px;
+
+    text-align: right;
+}
+
+.text {
+    position: relative; 
+    width: 275px;
+    top: -50px;
+    left: 75px;
+
+    font-size: 20px;
+
+    background: #ffffff;
+    padding: 10px;
+    border-style: solid;
+    border-width: 2px;
+    border-color: black;
+} 
+
+#name {
+    display: flex;
+}
+
+.picture {
+    cursor: pointer;
+}
+
+.pictures {
+    position: relative; 
+    height: fit-content;
+    display: flex;
+    flex-wrap: wrap;
+    padding: 50px;
+    padding-right: 300px;
+    margin-top: 5px;
+    flex-direction: row;
+    flex-wrap:nowrap;
+    overflow: scroll;
+
+    align-items: center;
+}
+
+
+#cart {
+    width: 50px;
+    height: 20px;
+    background: red;
+
+    position: absolute; 
+    bottom:0;
+    left: -25px;
+
+    border-radius: 5px;
+}
+
+#pole {
+    width: 10px;
+    height: 70px;
+    background: blue;
+
+    position: absolute; 
+    bottom:10;
+    left: -5px;
+
+    border-radius: 100px;
+
+    transform-origin: 50% 100%;
+}
+
+#target {
+    position: absolute;
+    bottom: 5px;
+    left: 0px;
+    width: 5px;
+    height: 5px;
+
+    background: white;
+    mix-blend-mode: difference;
+}
+
+#arrow-right {
+    display: none;
+}
+
+#links {
+    font-size: 18px;
+}
+
+@media only screen and (max-width: 1100px) {
+    .text-block-wide {
+        width: 600px;
+        margin-left: calc(50% - 300px);
+    
+        font-size: 40px;
+    }
+}
+
+@media only screen and (max-width: 800px) {
+    .text-block-wide {
+        width: 400px;
+        margin-left: calc(50% - 200px);
+
+        font-size: 30px;
+    }
+
+    #arrow-left {
+        display: none;
+    }
+
+    #arrow-right {
+        display: initial;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    body {
+        font-size: 15px;
+    }
+
+    #links {
+        font-size: 15px;
+    }
+
+    #pole {
+        height: 50px;
+        width: 8px;
+        left: -9px;
+        bottom: 5px;
+    }
+
+    #cart {
+        width: 40px;
+        height: 17px;
+    }
+
+    .text-block {
+        width: 300px;
+        margin-left: calc(50% - 150px);
+    }
+
+    .text-block-wide {
+        width: 300px;
+        margin-left: calc(50% - 150px);
+
+        font-size: 25px;
+    }
+
+    h3 {
+        font-size: 2.5rem;
+    }
+
+    .text {
+        font-size: 17px;
+    }
+
+    #name {
+        display:block !important;
+    }
+
+    .pictures {
+        padding: 50px 50px 50px 20px;
+    }
+
+    .film-image {
+        width: 90vw;
+        height: auto !important;
+    }
+}
+
+
+.link {
+    background: linear-gradient(to bottom, #00000000 90%, #4b2e8322 40%);
+}
+
+.image {
+    width: 300px;
+    height: 300px;
+
+    object-fit: cover;
+
+    border-style: solid;
+    border-width: 2px;
+    border-color: black;
+
+}
+
+.film-image {
+    height: 65vh;
+    align-self: center;
+}
+
+.picture {
+    margin-right: 30px;
+    margin-left: 30px;
+}
+
+.text-center {
+    top: -50px;
+    left: 12.5px;
+}
+
+.text-left {
+    top: -50px;
+    left: -50px;
+}
+
+.project {
+     }
+
+     a {
+         color: #2222ff;
+         text-decoration: none ;
+     }
+
+.link-nostyle {
+    color: inherit;
+}
+#link-block {
+    position: fixed;
+    top: -100px;
+    
+    width: fit-content;
+
+    background: #101020;
+    color: white;
+    padding: 3px 7px;
+}
+
+uni {
+    font-family: sans-serif;
+}
