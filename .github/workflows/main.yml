@@ -22,7 +22,7 @@ jobs:
           if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
       - name: Build website 
         run: |
-          generator/build.py --dest build 
+          python generator/build.py --dest build 
       - name: Deploy
         uses: JamesIves/github-pages-deploy-action@releases/v3
         with:
