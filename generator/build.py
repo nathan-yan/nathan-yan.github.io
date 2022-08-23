@@ -265,7 +265,7 @@ if __name__ == '__main__':
           'include'
         )
 
-        logging.info("Copying template files...")
+        logging.info(f"Copying template files to {copy_dest_path}...")
         copy_tree(include_path, os.path.join(copy_dest_path, 'include'))
 
       directory_name = os.path.basename(copy_dest_path) 
@@ -273,10 +273,12 @@ if __name__ == '__main__':
       # look for file with name "{directory_name}.md"
       index_markdown_file = f"{directory_name}.md"
       if index_markdown_file in os.listdir(copy_dest_path):
-        logging.info(f"Found {index_markdown_file}, building...")
 
         filename = os.path.join(copy_dest_path, index_markdown_file)
         dest_filename = os.path.join(copy_dest_path, 'index.html')
+
+        logging.info(f"Found {index_markdown_file}, building to {dest_filename}...")
+
         with open(dest_filename, 'w') as f:
           f.write(parser.parse(filename).render())
         
