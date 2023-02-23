@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="./style.css">
+    <link rel="icon" href="./favicon.ico" type="image/x-icon">
+    <script src="https://cdn.jsdelivr.net/npm/js-confetti@latest/dist/js-confetti.browser.js"></script>
+
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Gaegu:wght@400;700&display=swap" rel="stylesheet">
+
+  </head>
+  <style>
+    .valentine-path {
+        stroke-dasharray: 3260;
+        stroke-dashoffset: 3260;
+        animation: dash 20s ease-out forwards;
+    }
+
+    @keyframes dash {
+        to {
+            stroke-dashoffset: 0;
+        }
+    }
+
+    path {
+        display: none;
+    }
+
+    .marked {
+        display: initial;
+    }
+
+    .svg {
+        position: absolute;
+    }
+
+    img {
+        z-index: 100;
+    }
+
+    .hidden {
+        opacity: 0;
+    }
+
+    #bee-animation {
+        z-index: 102;
+        position: fixed;
+        top: 0;
+        left: 0;
+        background: white;
+        width: 100%;
+        height: 100%;
+
+        opacity: 0;
+        transition: opacity 1s ease-in-out;
+
+    }
+
+    #bee-3 {
+        cursor: pointer;
+    }
+
+    #bee-4 {
+        cursor: pointer;
+    }
+
+    #bee-1 {
+        transition: opacity 1s ease-out;
+    }
+
+    body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        font-family: "Gaegu";
+        font-weight: 600;
+        font-size: 2vw;
+
+        color: "#fff"
+    }
+
+    #letter-main {
+        font-size: 3vw;
+        width: 50%;
+        margin-left: 25%;
+        margin-top: 100px;
+    }
+
+    .embed-img {
+        margin-left: -40px;
+        z-index: -100;
+        position: relative;
+        margin-right: -20px;
+    }
+
+    .side {
+        display: flex;
+        position: relative;
+    }
+
+    .side-img {
+        position: absolute;
+        right: -50px;
+        z-index: -100;
+    }
+
+    .caption {
+        font-size: 2.3vw;
+        width: 75%;
+
+    }
+
+    .caption-right {
+        font-size: 2.3vw;
+        width: 75%;
+        text-align: right;
+        margin-left: 25%;
+    }
+  </style>
+  <body style="padding-bottom: 100px;">
+    <main>
+        <div id="letter-main">
+            Hi Candace!
+            <br/><br/> 
+            It's our fourth valentine's <span><img class='embed-img' src="./heart.svg" style='width:50px; margin: 0 -20px 20px -40px; transform: rotate(-80deg)'/></span> day! 
+            <br/><br/>
+            <div class="side">
+                <div>
+                    We've spent a lot of time long-distance, so I often enjoy taking a look back at our memories and smiling at the little things I love about you, that don't often show in zoom calls or riveting spelling bee gameplay.
+                </div>
+                <img class='side-img' src="./long-distance.svg" style="width: 150px; transform: rotate(30deg); right: -80px;">
+                <img class='side-img' src="./polaroids.svg" style="width: 150px; transform: rotate(30deg); left: -100px; top: 60px">
+                <img class='side-img' src="./spelling-bee.svg" style="width: 150px; transform: rotate(-00deg); right: -50px; top: 250px">
+            </div>
+            <br/>
+            <div class="side">
+                <div>
+                    It's hard to put all these memories, and the feelings I associate with them purely in words. Luckily, a wise man once said that a picture is worth a thousand words. And so, I present:
+                </div>
+            </div>
+            <br/><br/>
+            <div style="text-align: center">
+               The Marvelous Misadventures of Candace and Nathan 
+            </div>
+            <div style="margin-top: 50px">
+                <img src="./aug19.svg" style="width:100%">
+                <div class="caption">
+                    I've told you this already, but this is <i>the</i> photo that made me realize just how insanely cute you are!
+                </div>
+            </div>
+            <div style="margin-top: 100px">
+                <img src="./oct19.svg" style="width:100%">
+                <div class="caption-right" style="text-align: right">
+                    When you put your head on my shoulder during Jurassic Park I was freaking out.
+                </div>
+            </div>
+            <div style="margin-top: 100px">
+                <img src="./feb20.svg" style="width:100%">
+                <div class="caption" style="">
+                    Dude do you remember Penguin Isle???
+                </div>
+            </div>
+            <div style="margin-top: 100px">
+                <img src="./mar20.svg" style="width:100%">
+                <div class="caption-right" style="">
+                    A wholesome TOLO ask :D The pandemic looms near D:
+                </div>
+            </div>
+            <div style="margin-top: 100px">
+                <img src="./jul20.svg" style="width:100%">
+                <div class="caption-right" style="margin-top: -70px;width: 50%; margin-left: 50%">
+                    (I doubted that you could fill out a map of the US [you didn't fill them all out doe {so in a way I was right}])
+                </div>
+            </div>
+            <div style="margin-top: 100px; padding-bottom: 20px">
+                <img src="./aug20.svg" style="width:calc(100vw - 60px); position: absolute; left: 30px;">
+                <div class="caption" style="padding-top: 25vw; font-size: 35px; width: 100%">
+                    The Oregon trip was so much fun! This was basically the longest amount of time I had spent with you ever, and from being able to see the stars for a bit on that early morning hike, to just holding hands in the car, I loved every second of that trip with you. 
+                </div>
+            </div>
+            <div  style="margin-top: 100px">
+                <img src="./oct20.svg" style="width:90vw; position: absolute; left: 5vw;">
+                <div class="caption" style="padding-top: 95vw; font-size: 35px; width: 100%">
+                    We should do pumpkin photos again sometime! And thanks for teaching me how to crochet, even though I'm unteachable. 
+                </div>   
+            </div>
+            <div  style="margin-top: 100px">
+                <img src="./jun21.svg" style="width:100%">
+                <div class="caption" style="margin-bottom: 15px;">
+                    Dang that trip to Seattle really shook you up didn't it? (We visited the map shop!)
+                </div>
+                <img src="./jun21_2.svg" style="marign-top: 50px; width:100%">
+                <div class="caption-right">
+                    Remember when we just... drove to North Bend then drove right back? 
+                    <br/><br/>
+                    It was fun though, could be considered our first road trip with just us!
+                </div>
+            </div>
+
+            <div style="margin-top: 100px; padding-bottom: 20px">
+                <img src="./jul21.svg" style="width:calc(100vw - 60px); position: absolute; left: 30px;">
+                <div class="caption" style="padding-top: 26vw; font-size: 35px; width: 100%">
+                    I'm glad we finally got to try out our equatorial mount in dark skies, even if it didn't really work!
+                </div>
+            </div>
+
+
+            <div  style="margin-top: 100px">
+                <img src="./aug21.svg" style="width:100%">
+                <div class="caption" style="">
+                    Hhhghhhhghhhgh cat cafe and Candace is a match made in heaven.
+                </div>
+            </div>
+            <div>
+                <img src="./aug21_2.svg" style="width:100%">
+                <div class="caption-right" style="">
+                    Thanks for being my mosquito magnet hehe :)
+                </div>
+            </div>
+
+            <div style="margin-top: 100px">
+                <img src="./oct21.svg" style="width:90vw; position: absolute; left: 5vw;">
+                <div class="caption" style="padding-top: 103vw; font-size: 35px; width: 100%">
+                    The first trip of many to Princeton!
+                    <br/><br/>
+                    Visiting New York with you and your friends was a ton of fun. I'm really grateful that we'll be able to explore New Stanky more often next year! 
+                </div>   
+            </div>    
+            <div style="margin-top: 100px">
+                <img src="./dec21.svg" style="width:100%">
+                <div class="caption" style="">
+                    Our first attempt at seeing Snowflake lane (we did not succeed).
+                    
+                </div>
+            </div>
+            <div style="margin-top: 100px">
+                <img src="./jan22.svg" style="width:100%">
+                <div class="caption" style="text-align: center; width: 100%; margin-left: 0">
+                    So much food during winter break, especially the yuzu panna cotta 🤤
+                </div>
+            </div>
+            <div style="margin-top: 100px">
+                <img src="./feb22.svg" style="width:100%">
+                <div class="caption-right" style="">
+                    A wholesome remote valentine's day.
+                </div>
+            </div>
+            <div style="margin-top: 100px">
+                <img src="./mar22.svg" style="width:100%">
+                <div class="caption-right" style="width: 50%;margin-left: 50%; margin-top: -20vw">
+                    Second trip to Princeton, and our insane two day New York trip.
+                </div>
+            </div>
+            <div style="margin-top: 16vw">
+                <img src="./may22.svg" style="width:100%">
+                <div class="caption" style="">
+                    Some pre-birthday tres leches cake before your internship!
+                </div>
+            </div>
+            <div style="margin-top: 100px">
+                <img src="./jun22.svg" style="width:80vw; position: absolute; left: 10vw;">
+                <div class="caption" style="padding-top: 91vw; font-size: 35px; width: 100%">
+                    A sweaty and hot trip to Texas! The great food and Buc-ee's will be missed, but not enough to come back...
+                </div>   
+            </div> 
+            <div style="margin-top: 100px">
+                <img src="./sep22.svg" style="width:100%">
+                <div class="caption-right" style="">
+                    Move in day!
+                </div>
+            </div>   
+            <div>
+                <img src="./sep22_2.svg" style="width:100%; margin-top:-1vw">
+                <div class="caption" style="">
+                    Your first Broadway show!
+                </div>
+            </div>   
+            <div>
+                <img src="./sep22_3.svg" style="width:100%; margin-top:0.5vw">
+                <div class="caption-right" style="">
+                    Your first omakase!
+                </div>
+            </div>   
+            <div>
+                <img src="./sep22_4.svg" style="width:100%; margin-top:1vw">
+                <div class="caption" style="">
+                    My first shit that glowed 😳!
+                </div>
+            </div>  
+            
+            <div style="margin-top: 100px">
+                <img src="./oct22.svg" style="width:80vw; position: absolute; left: 10vw;">
+                <div class="caption" style="padding-top: 93vw; font-size: 35px; width: 100%">
+                    Our first in person anniversary in a while! It still kinda surprises me that I was able to spend so much time with you in Princeton, and I'm really happy I did it. 
+                </div>   
+            </div> 
+
+            <div style="margin-top: 100px">
+                <img src="./jan23.svg" style="width:100%; margin-top:1vw">
+                <div class="caption-right" style="">
+                    Bruh this keyboard sounded so nice.
+                </div>
+            </div>  
+
+            <div>
+                <img src="./jan23_2.svg" style="width:100%; margin-top:1vw">
+                <div class="caption" style="">
+                    We had so many oysters in just a few days! The Friday dollar per shuck oysters were an interesting experience for sure.
+                </div>
+            </div>  
+
+            <div>
+                <img src="./jan23_3.svg" style="width:100%; margin-top:1vw">
+                <div class="caption-right" style="">
+                    A quick launch before you leave for Princeton again.
+                </div>
+            </div>  
+            <br/><br/>
+            Phew! That's basically everything (so far). Thanks for sticking around with me for so long Candace, happy valentine's day :)
+            <br/><br/>
+
+            <div style="text-align: center; width:100%;">
+                <img src="./signoff.svg">
+            </div>
+
+        </div>
+        
+    </main>
+	<script src="index.js"></script>
+  </body>
+</html>
+
+<script>
+    const init = () => {
+
+        const jsConfetti = new JSConfetti()
+
+        setTimeout(() => {
+            const num_bees = 4;
+
+            let paths = {};
+            let bees = [];
+            let texts = [];
+            let durations = [20000, 7000, 5000, 5000];
+            let offsets = [0, 15000, 15000, 15000];
+            let tops = [-440, -415, 110, 110];
+            let lefts = [-554, -45, -100, -270];
+
+            for (let i = 1; i < num_bees+1; i++) {
+                bees.push(document.getElementById(`bee-${i}`))
+                texts.push(document.getElementById(`bee-bzz-${i}`))
+                let p = document.getElementById(`bee${i}-entrance`);
+                paths[i] = [
+                    [p, p.getTotalLength()]
+                ];
+
+                // entrance, exit, arbitrary number of paths
+                for (let j = 1; j < 10; j++) {
+                    // check if bee{i}-path{j} exists
+                    p = document.getElementById(`bee${i}-path${j}`);
+
+                    if (p) {
+                        paths[i].push([p, p.getTotalLength()]);
+                    } else {
+                        p = document.getElementById(`bee${i}-path${j}-travel`);
+
+                        if (p) {
+                            paths[i].push([p, p.getTotalLength()]);
+                        }
+                    }
+                }
+
+                p = document.getElementById(`bee${i}-exit`);
+                if (p) {
+                    paths[i].push([p, p.getTotalLength()]);
+                }
+            }
+
+            bees[2].addEventListener("click", () => {
+                jsConfetti.addConfetti({
+                    emojis: ['❤️', "🐝"]
+
+                });
+            })
+
+
+            bees[3].addEventListener("click", () => {
+                jsConfetti.addConfetti({
+                    emojis: ['❤️', "🐝"]
+                });
+            })
+
+            console.log(paths);
+
+            const duration = 20 * 1000;
+
+            let start_time; 
+            let ticking = false;
+
+            const animate = timestamp => {
+                if (ticking) {
+                    return
+                } else if (!start_time) {
+                    start_time = timestamp;
+                } 
+                ticking = true; 
+
+                const width = window.innerWidth;
+                const height = window.innerHeight;
+
+                const currentTime = timestamp - start_time;
+                for (let bee = 1; bee < num_bees+1; bee++) {
+                    const ps = paths[bee];
+                    const duration = durations[bee-1];
+                    const offset = offsets[bee-1];
+
+                    let total_length = 0;
+
+                    ps.forEach(([path, length], idx) => {
+                        total_length += length;
+                    })
+                    
+                    let location = (currentTime - offset)/duration * total_length;
+
+                    if (location > total_length-100 && bee == 1) {
+                        bees[bee-1].classList.add('hidden');
+                    }
+
+                    if (location > total_length) {
+                        location = total_length - 15;
+                    }
+
+                    ps.forEach(([path, length], idx) => {
+                        if (location > length) {
+                            location -= length;
+                        } else {
+                            const {x, y} = path.getPointAtLength(location);
+                            const {x: x2, y: y2} = path.getPointAtLength(location + 2);
+                            const angle = Math.atan2(y-y2, x-x2);
+                            
+                            if (path.id.includes("path") && !path.id.includes("travel") && !path.classList.contains("marked")) {
+                                path.style = `stroke-dasharray: ${length}; stroke-dashoffset: ${length}; animation: dash ${duration/1000*length/total_length}s linear forwards;`;
+                                path.classList.add('marked');
+                            }
+
+                            let xoff = width/2 + lefts[bee-1];
+                            let yoff = height/2 + tops[bee-1];
+
+                            bees[bee-1].setAttribute("style", `position: absolute; transform: translate(${x-20+xoff}px, ${y-20+yoff}px)  rotate(${angle*180/Math.PI - 90}deg)`);
+
+                            location = 1000000;
+                        }
+                    })
+                }
+
+                ticking = false;
+                requestAnimationFrame(animate);
+            }
+
+            requestAnimationFrame(animate);
+        }, 2300);
+
+        setTimeout(() => {
+            const animation = document.getElementById("bee-animation");
+            animation.style = "opacity: 1";
+        }, 2500)
+    }
+
+    document.addEventListener('DOMContentLoaded', init)
+
+     let seconds = document.getElementById('seconds');
+    let days = document.getElementById('days');
+
+    const formatNumber = (number) => {
+        let stringNum = number + '';
+
+        if (stringNum.length === 6) {
+            stringNum = stringNum.slice(0, 3) + "," + stringNum.slice(3);
+        } else if (stringNum.length === 5) {
+            stringNum = stringNum.slice(0, 2) + "," + stringNum.slice(2);
+        } else if (stringNum.length === 4) {
+            stringNum = stringNnum.slice(0, 1) + "," + stringNum.slice(1);
+        } else {
+            
+        }
+
+        return stringNum;
+    }
+
+    setInterval(() => {
+        const timestamp = Date.now();
+        const referenceDate = 1679446800000;
+
+        const remaining = referenceDate - timestamp;
+        const secondsRemaining = remaining/1000;
+
+        let daysRemaining = secondsRemaining / (60 * 60 * 24) * 1000;
+        daysRemaining = Math.round(daysRemaining) / 1000;
+
+        seconds.innerText = formatNumber(Math.round(secondsRemaining)) + " s";
+        days.innerText = daysRemaining + ' days';
+    }, 5000);
+</script>
