@@ -24,11 +24,11 @@
     <div id="content">
       <div class="title">Equipping neural networks with differentiable memory: Neural Turing Machines</div>
       <div class="date">Jan 29, 2022</div>
-      <div class="section intro"><p>Most neural networks are unable to remember, and those that can cannot remember for long. Networks like LSTMs are able to use their hidden state to store data, but will forget over time. How can we create a neural network that theoretically never forgets, but is still trainable through gradient descent?</p>
+      <div class="section intro"><p>Most neural networks are unable to remember, and those that can cannot remember for long. Networks like LSTMs are able to use their hidden state to store data but will forget over time. How can we create a neural network that theoretically never forgets, but is still trainable through gradient descent?</p>
 </div>
       <div class="section">History</div>
       <div id="p-1">
-<p>The <a href="https://arxiv.org/pdf/1410.5401.pdf">Neural Turing Machine (NTM)</a> is based on the <a href="https://en.wikipedia.org/wiki/Turing_machine">Turing machine</a>, first introduced by Alan Turing in 1936. A Turing machine is a theoretical machine that consists of an infinitely long &quot;memory tape&quot;, on which the Turing machine can read and write bits from, based on a set of rules. What&#x27;s special about the Turing machine is that, despite its simplicity, it&#x27;s able to simulate or run any algorithm you give it. Recurrent Neural Networks have been proven to be Turing complete, meaning that they can do anything a Turing machine can. However, Turing complete behavior often cannot be learned by an RNN through gradient descent, and the nature of an RNN&#x27;s Turing completeness is mostly just theoretical.</p>
+<p>The <a href="https://arxiv.org/pdf/1410.5401.pdf">Neural Turing Machine (NTM)</a> is based on the <a href="https://en.wikipedia.org/wiki/Turing_machine">Turing machine</a>, first introduced by Alan Turing in 1936. A Turing machine is a theoretical machine that consists of an infinitely long &quot;memory tape&quot;, on which the machine can read and write bits from based on a set of rules. What&#x27;s special about the Turing machine is that, despite its simplicity, it is able to simulate or run any algorithm you give it. Recurrent Neural Networks have been proven to be Turing complete, meaning that they can do anything a Turing machine can. However, Turing complete behavior often cannot be learned by an RNN through gradient descent, and the nature of an RNN&#x27;s Turing completeness is primarily theoretical.</p>
 </div>
       <div assign_to="p-1" class="img">
         <img alt="![An animated gif of a traditional Turing machine](assets/turing-machine.gif &quot;A Turing machine at work&quot;)" src="assets/turing-machine.gif" title="A Turing machine at work">
@@ -49,10 +49,13 @@
 </div>
       <div class="section">Why is external memory so important?</div>
       <div>
-<p>The main importance of external memory is that it&#x27;s expandable. In a LSTM, each cell neuron requires its own set of weights. We can&#x27;t just add more cells to give it more memory, because that would require retraining the network. However, external memory is not explicitly connected to the NTM, so we can make our memory as large as we need to, and the network won&#x27;t even notice.</p>
+<p>The main importance of external memory is that it&#x27;s expandable. In an LSTM, each cell neuron requires its own set of weights. We can&#x27;t just add more cells to give it more memory, because that would require retraining the network. With external memory however, we decouple the actual core neural network model from its memory, allowing us to expand/contract it as we see fit.</p>
 </div>
       <div>
-<p>Another important aspect of external memory is that it&#x27;s big. A LSTM has a single cell vector for passing data from previous timesteps. If it wants to remember two things at once, it has to learn an appropriate representation for <em>both</em> elements at once. However, with external memory, the NTM can just learn representations for each individual element, and write them to different parts of the memory.</p>
+<p>Another important aspect of external memory is that it&#x27;s big. An LSTM has a single cell vector for passing data from previous timesteps. If it wants to remember two things at once, it has to learn an appropriate representation for <em>both</em> elements at once. However with external memory, the NTM can just learn representations for each individual element, and write them to different parts of the memory.</p>
+</div>
+      <div>
+<p>The key to this type of external memory is to change how we query it. An LSTM processes its memory by computing a linear combination of its cell neurons. This means we cannot add/remove cells without destroying the representation it has learned. With an NTM, we query memory by making the network generate a pointer to a location in memory. This pointer is differentiable, and can be moved relative to its current location (position based lookup) or repositioned by directly looking up a memory (content based lookup). The following sections will describe how this works in much further detail.</p>
 </div>
       <div class="section">Components of an NTM</div>
       <div>
@@ -65,7 +68,7 @@
 </div>
       <div id="p-2">
 <ol start="2">
-<li>Memory: this is a \(M \times N\) matrix that stores data (where \(M\) is the size of memory, and \(N\) is the size of each memory item). The controller network will be able to read from the memory matrix using its read heads, and write to the memory matrix using its write heads.</li>
+<li>Memory: this is an \(M \times N\) matrix that stores data (where \(M\) is the size of memory, and \(N\) is the size of each memory item). The controller network will be able to read from the memory matrix using its read heads and write to the memory matrix using its write heads.</li>
 </ol>
 </div>
       <div assign_to="p-2" class="img">
@@ -74,12 +77,12 @@
       </div>
       <div>
 <ol start="3">
-<li>Read and write heads: these heads are what alter the memory. At each timestep, a head will take the information from the controller&#x27;s hidden state, and produces a list of parameters. These parameters interact with the memory matrix to either read from it or write to it.</li>
+<li>Read and write heads: these heads are what alter the memory. At each timestep a head will take the information from the controller&#x27;s hidden state and produce a list of parameters. These parameters interact with the memory matrix to either read from it or write to it.</li>
 </ol>
 </div>
       <div class="section">Reading from memory</div>
       <div>
-<p>Reading from memory is real simple. We have a weighting, \(\textbf{w}\), which is a \(M\) sized vector, and therefore has a value for every slot in memory. The higher a weighting value is for its corresponding memory slot, the more information we get out of that memory slot. Each value of the weighting vector must be between 0 and 1, where 0 is no attention at all (the NTM doesn&#x27;t care about that memory at all), and 1 is full attention. We also need to normalize our weighting, so that all of its elements add up to 1. This is because it doesn&#x27;t make sense for the network to &quot;fully attend&quot; to two positions in memory. Think of it like percentage of focus on a piece of memory. Every memory slot receives a certain percentage of focus from the NTM, and the sum of all percentages must add up to no less or no more than 1.</p>
+<p>Reading from memory is fairly simple. We have a weighting, \(\textbf{w}\), which is an \(M\) sized vector, and therefore has a value for every slot in memory. The higher a weighting value is for its corresponding memory slot, the more information we get out of that memory slot. Each value of the weighting vector must be between 0 and 1, where 0 is no attention at all (the NTM doesn&#x27;t care about that memory at all), and 1 is full attention. We also need to normalize our weighting, so that all of its elements add up to 1. This is because it doesn&#x27;t make sense for the network to &quot;fully attend&quot; to two positions in memory. Another way to think about it is that every memory slot receives a certain percentage of focus from the NTM, and the sum of all percentages must add up to exactly 1.</p>
 </div>
       <div>
 <p>To read, we multiply every vector in memory by its corresponding weighting value. We then add up all the multiplied vectors. Since all the elements in the weighting vector sum up to 1, we&#x27;ve effectively just taken a weighted average of the elements in memory. Mathematically, what we&#x27;re doing is</p>
@@ -103,14 +106,14 @@
   </div>
       <div class="section">Writing to memory</div>
       <div>
-<p>Writing to memory is slightly more complicated. Writing is different than reading in that we not only need to decide where we write to, but also <em>what</em> to write. Write heads will also be able to erase stuff from memory. The write head will produce three vectors, instead of the read head&#x27;s one vector. The first vector is the weighting vector, \(\textbf{w}\) (same as the read head), the second is the erase vector, \(\textbf{e}\), and the third is the write vector, \(\textbf{a}\).</p>
+<p>Writing to memory is slightly more complicated. Writing is different than reading in that we not only need to decide where we write to, but also <em>what</em> to write. Write heads will also be able to erase stuff from memory. The write head will produce three vectors instead of the read head&#x27;s one vector. The first vector is the weighting vector, \(\textbf{w}\) (same as the read head). The second is the erase vector, \(\textbf{e}\). And the third is the write vector, \(\textbf{a}\).</p>
 </div>
       <div>
-<p>First, we&#x27;ll erase from memory. The erase vector is a \(N\) sized vector. This is the size of a memory slot.f The erase vector represents whether or not we keep a memory slot number. The weighting vector dictates how much each memory slot will be affected by the erase vector. A weighting of 0 would mean the memory stays totally the same. A weighting of 1 means that it&#x27;s fully subjected to the erase vector. We take the weighting vector, and multiply each weighting value with the erase vector. We end up with an array of multiplied erase vectors</p>
+<p>First, we&#x27;ll erase from memory. The erase vector is an \(N\) sized vector. This is the size of a memory slot. The erase vector represents how much we want to erase from each cell in each memory slot. The weighting vector dictates how much each memory slot will be affected by the erase vector. A weighting of 0 would mean the memory stays totally the same. A weighting of 1 means that it&#x27;s fully subjected to the erase vector. We take the weighting vector, and multiply each weighting value with the erase vector. We end up with an array of multiplied erase vectors</p>
 </div>
       <div class="eq">\(\tilde{\textbf{e}} = [w_0\textbf{e}, w_1\textbf{e} \cdots, w_M\textbf{e}]^\top\)</div>
       <div>
-<p>Each value in this array corresponds to a location in memory. In this case, \(\textbf{w}_i\) is a scalar, so when we multiply a scalar with a vector like \(\textbf{e}\), we multiply each element in \(\textbf{e}\) by the scalar. Therefore, each element in the array is of size \(N\). We&#x27;ll alter \(\tilde{\textbf{e}}\) just a little bit, by subtracting each element from 1</p>
+<p>Each value in this array corresponds to a location in memory. In this case \(\textbf{w}_i\) is a scalar, so when we multiply a scalar with a vector like \(\textbf{e}\), we multiply each element in \(\textbf{e}\) by the scalar. Therefore, each element in the array is of size \(N\). We&#x27;ll alter \(\tilde{\textbf{e}}\) just a little bit, by subtracting each element from 1</p>
 </div>
       <div class="eq">\(\tilde{\textbf{e}} = [1 - w_0\textbf{e}, 1 - w_1\textbf{e} \cdots, 1 - w_M\textbf{e}]^\top\)</div>
       <div>
@@ -142,7 +145,7 @@
 </div>
       <div class="eq">\(\textbf{M}_{new} = \tilde{\textbf{M}} +  \textbf{w}\textbf{a}^{\top}\)</div>
       <div>
-<p>Where \(\tilde{\textbf{M}}\) is the erased memory matrix mentioned before. The matrix multiplication, \(\textbf{w}\textbf{a}^{\top}\), is the exact same operation as mentioned in the previous paragraphs, but with the add vector instead of the erase vector. Also, note that instead of multiplying the memory matrix, we add to the memory matrix.</p>
+<p>Where \(\tilde{\textbf{M}}\) is the erased memory matrix mentioned before. The matrix multiplication, \(\textbf{w}\textbf{a}^{\top}\), is the exact same operation as mentioned in the previous paragraphs, but with the add vector instead of the erase vector. Also, note that instead of multiplying the memory matrix, we add to the memory matrix. This is because the act of writing isn&#x27;t just a matter of scaling the existing memory--we actually want to add/subtract values in each cell.</p>
 </div>
   <div style='background: #f9f9f9; margin-left: -14vw;  margin-top: 25px; margin-bottom: 25px; padding: 50px 50px 5vw 14vw; width: 95vw'>
     <img src='assets/write.svg' style='height: auto; width: 70vw; background-color: "#aaa"' id='demo-3' onload="SVGInject(this)" class='demo'>
@@ -155,25 +158,25 @@
   </div>
       <div class="section">Computing the weight vector</div>
       <div>
-<p>Add vectors and erase vectors are generated directly as outputs of the read/write heads, but the weighting vector, \(\textbf{w}\), is generated using a slightly more complicated process. Essentially, generating the weighting vector boils down into three steps: content based addressing, interpolation and location based addressing.</p>
+<p>Add vectors and erase vectors are generated directly as outputs of the read/write heads, but the weighting vector, \(\textbf{w}\), is generated using a slightly more complicated process. Generating the weighting vector boils down into three steps: content based addressing, interpolation and location based addressing.</p>
 </div>
       <div class="subsection">Content based addressing</div>
       <div>
 <p>Content based addressing uses a key vector to query a memory from the memory matrix. This key vector is generated directly as an output of the read/write head just like an add or erase vector, and is the basis for our preliminary weighting, \(\textbf{w}_c\).</p>
 </div>
       <div>
-<p>If our memory matrix, \(\textbf{M}\) is of size \(M \times N\), then the key vector, \(\textbf{k}\) is a \(N\) sized vector. We will go through each memory slot, and compare the value stored in that memory slot with the key vector. The closer the memory slot value is to the key vector value, the higher the weighting is. The metric we use for distance, which we will denote \(f_k(\textbf{M}_i, \textbf{k})\) can be almost anything. \(\textbf{M}_i\) denotes the \(i\)th value of the memory matrix. As an example, we can use square distance: \(f_k(\textbf{M}_i, \textbf{k}) = \sum(\textbf{M}_i - \textbf{k})^2\). However, in the paper, the authors used <em>cosine similarity</em>:</p>
+<p>If our memory matrix \(\textbf{M}\) is of size \(M \times N\), then the key vector \(\textbf{k}\) is an \(N\) sized vector. We will go through each memory slot, and compare the value stored in that memory slot with the key vector. The closer the memory slot value is to the key vector value, the higher the weighting is. There are lots of choices for the metric we use for distance, which we will denote \(f_k(\textbf{M}_i, \textbf{k})\) ( \(\textbf{M}_i\) denotes the \(i\)th value of the memory matrix). As an example, we can use square distance: \(f_k(\textbf{M}_i, \textbf{k}) = \sum(\textbf{M}_i - \textbf{k})^2\). However, in the paper, the authors used <em>cosine similarity</em>:</p>
 </div>
       <div class="eq">\(f_k(\textbf{M}_i, \textbf{k}) = \frac{\textbf{M}_i \cdot \textbf{k}}{||\textbf{M}_i|| \cdot ||\textbf{k}||}\)</div>
       <div>
-<p>\(A \cdot B\) is the dot product between vectors \(A\) and \(B\), and \(||A||\) and \(||B||\) are the magnitudes of the vectors \(A\) and \(B\). The reason why the authors chose cosine similarity is that it measures the cosine of the angle between vectors \(A\) and \(B\). What&#x27;s nice about this is that if the NTM wants to apply a high weighting to a certain memory slot index \(i\), the key vector does not have to be exactly \(\textbf{M}_i\), but instead any vector \(a\textbf{M}_i\), for any scalar \(a\), since the angle between two vectors is independent of their magnitude. Basically, the magnitude of the query and memory slot vectors don&#x27;t have to match, just their direction.</p>
+<p>\(A \cdot B\) is the dot product between vectors \(A\) and \(B\), and \(||A||\) and \(||B||\) are the magnitudes of the vectors \(A\) and \(B\). The authors likely chose cosine similarity because it is invariant to the magnitude of the compared vectors. So if the NTM wants to apply a high weighting to a certain memory slot index \(i\), the key vector does not have to be exactly \(\textbf{M}_i\) but instead any vector \(a\textbf{M}_i\), for a given scalar \(a\). Basically, the magnitude of the query and memory slot vectors don&#x27;t have to match--just their direction.</p>
 </div>
       <div>
-<p>So we apply \(f_k(\textbf{M}_i, \textbf{k})\) to all elements in \(\textbf{M}\), and we produce a preliminary weighting vector, \(\textbf{w}_c\) (subscript \(c\) for &quot;content&quot;).</p>
+<p>So we apply \(f_k(\textbf{M}_i, \textbf{k})\) to all elements in \(\textbf{M}\) and we produce a preliminary weighting vector \(\textbf{w}_c\) (subscript \(c\) for &quot;content&quot;).</p>
 </div>
       <div class="eq">\(\textbf{w}_c = [f_k(\textbf{M}_0, \textbf{k}), f_k(\textbf{M}_1, \textbf{k}) \cdots ,f_k(\textbf{M}_M, \textbf{k})]^\top\)</div>
       <div>
-<p>Once we have this weighting vector, we&#x27;re going to do some processing to it, to make sure that all weighting values add up to 1 (reference to <a href = '#goto1'>this</a>). The natural choice for this normalization is the softmax function:</p>
+<p>Once we have this weighting vector we&#x27;re going to do some processing to it to make sure that all weighting values add up to 1. The natural choice for this normalization is the softmax function:</p>
 </div>
       <div class="eq">\(\textbf{w}_c^i := \frac{\exp{(\textbf{w}_c^i)}}{\sum_j \exp{(\textbf{w}_c^j)}}\)</div>
       <div>
@@ -202,18 +205,18 @@
   </div>
       <div class="subsection">Interpolation value</div>
       <div>
-<p>Before we talk about location based addressing, we need to introduce the concept of time to the NTM. In order to do this, we&#x27;re going to have to reconfigure our notation a tiny bit. The current timestep number will be denoted as \(t\), and will be in the subscript of a variable, like so: \(\textbf{w}_t\). The name of the variable will be in the superscript. For example, the content weighting vector, \(\textbf{w}_c\) under the old notation, will now be \(\textbf{w}_t^c\). To index a variable under this new notation, we&#x27;ll use \(\textbf{w}_t^c[i]\) to indicate the \(i\)th value of the vector or matrix.</p>
+<p>Before we talk about location based addressing we need to introduce the concept of time to the NTM. In order to do this, we&#x27;re going to have to reconfigure our notation a tiny bit. The current timestep number will be denoted \(t\), and will be in the subscript of a variable like so: \(\textbf{w}_t\). The name of the variable will be in the superscript. For example, the content weighting vector, which was \(\textbf{w}_c\) under the old notation, will now be \(\textbf{w}_t^c\). To index a variable under this new notation we&#x27;ll use \(\textbf{w}_t^c[i]\) to indicate the \(i\)th value of the vector or matrix.</p>
 </div>
       <div>
 <p>The purpose of the interpolation value is to decide between either using the current content weighting, or keeping the <i>final</i> weighting produced by the head in the <i>previous</i> timestep. The importance of this will become apparent later. The interpolation value will be denoted \(g_t\), and will be \(\in [0, 1]\). To find the interpolated weighting, \(\textbf{w}_t^g\)</p>
 </div>
       <div class="eq">\(\textbf{w}_t^g = g_t \textbf{w}_t^c + (1 - g_t)\textbf{w}_{t - 1}\)</div>
       <div>
-<p>Basically, if \(g_t\) is \(0\), then we&#x27;ll abandon our content based weighting vector, and just use the old one from the previous timestep.</p>
+<p>Basically, if \(g_t\) is \(0\), then we&#x27;ll abandon our content based weighting vector and just use the old one from the previous timestep.</p>
 </div>
       <div class="eq">\(\textbf{w}_t^g = 0 \cdot \textbf{w}_t^c + (1 - 0)\textbf{w}_{t - 1} = \textbf{w}_{t - 1}\)</div>
       <div>
-<p>If \(g_t\) is \(1\), then we&#x27;ll use our content based weighting vector, and discard the old one from the previous timestep.</p>
+<p>If \(g_t\) is \(1\), then we&#x27;ll use our content based weighting vector and discard the old one from the previous timestep.</p>
 </div>
       <div class="eq">\(\textbf{w}_t^g = 1 \cdot \textbf{w}_t^c + (1 - 1)\textbf{w}_{t - 1} = \textbf{w}_{t}^c\)</div>
       <div class="subsection">Location based addressing/shift vector</div>
@@ -232,7 +235,7 @@
       </div>
   </div>
       <div>
-<p>The read head will output a shift vector, \(\textbf{s}_t\), where each element \(\textbf{s}_t[i]\) represents how much we are going to shift by \(i - \lfloor{\frac{ |\textbf{s}_t| }{2}}\rfloor\). For most tasks, we&#x27;ll only want to be able to shift by 1 unit to the left or right, meaning our shift vector will look like, \([ s_{noshift}, s_{right}, 0, 0 \cdots, s_{left}]^\top\). The shift vector will need to be the same size as our weighting vector. The value that represents no-shift is in the 0th index, the value that represents one-right-shift is in the 1st index, and so on. The value that represents one-left-shift is in the -1st index, which wraps around to the back of the vector, which is evident in the example shift vector above. Notice that the shift amount (like 1, 0, -1) is exactly the same as the shift value&#x27;s index in the shift vector. Our shift vector values must also add up to one, so we will need to normalize the values \(s_{left}\), \(s_{noshift}\), \(s_{right}\) with softmax so they add up to one. Note that we are not going to softmax the whole shift vector, just the shift values.</p>
+<p>The read head will output a shift vector \(\textbf{s}_t\), where each element \(\textbf{s}_t[i]\) represents how much we are going to shift by \(i - \lfloor{\frac{ |\textbf{s}_t| }{2}}\rfloor\). For most tasks we&#x27;ll only want to be able to shift by 1 unit to the left or right, meaning our shift vector will look like, \([ s_{noshift}, s_{right}, 0, 0 \cdots, s_{left}]^\top\). The shift vector will need to be the same size as our weighting vector. The value that represents no-shift is in the 0th index, the value that represents one-right-shift is in the 1st index, and so on. The value that represents one-left-shift is in the -1st index, which wraps around to the back of the vector, which is evident in the example shift vector above. Notice that the shift amount (like 1, 0, -1) is exactly the same as the shift value&#x27;s index in the shift vector. Our shift vector values must also add up to one, so we will need to normalize the values \(s_{left}\), \(s_{noshift}\), \(s_{right}\) with softmax so they add up to one. Note that we are not going to softmax the whole shift vector, just the shift values.</p>
 </div>
       <div>
 <p>As a quick example, let&#x27;s say our interpolated weighting vector is \([0.1, 0.15, 0.65, 0.05, 0.05]^\top\), and our shift vector is \([0, 0, 0, 0, 1]^\top\), the new shifted weighting vector would be \([0.15, 0.65, 0.05, 0.05, 0.1]^\top\). Notice that the first element in the vector has been wrapped around to the other side. This shift in weighting can be viewed either as shift one unit to the left, or a shift four units to the right.</p>
